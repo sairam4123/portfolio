@@ -7,6 +7,7 @@ import {
   SiPostgresql, SiMysql, SiSupabase,
   SiGit, SiGithub, SiDocker, SiVercel,
 } from "@icons-pack/react-simple-icons";
+import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
 const groups: { label: string; icon: LucideIcon; color: string; skills: { name: string; Icon?: React.ComponentType<{ size?: number; color?: string; className?: string }> }[] }[] = [
   {
@@ -26,7 +27,7 @@ const groups: { label: string; icon: LucideIcon; color: string; skills: { name: 
   {
     label: "Frontend",
     icon: Layout,
-    color: "text-blue-400",
+    color: "text-sky-400",
     skills: [
       { name: "React", Icon: SiReact },
       { name: "Next.js", Icon: SiNextdotjs },
@@ -76,7 +77,6 @@ const groups: { label: string; icon: LucideIcon; color: string; skills: { name: 
   },
 ];
 
-// Floating logo particles in the background
 const particles = [
   { Icon: SiTypescript,  x: 6,  y: 8,  size: 28, delay: "0s",    dur: "7s"   },
   { Icon: SiPython,      x: 80, y: 5,  size: 24, delay: "1.2s",  dur: "6.5s" },
@@ -98,7 +98,6 @@ const particles = [
 export default function Skills() {
   return (
     <section id="skills" className="py-24 px-6 relative">
-      {/* Floating logo particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
         {particles.map((p, i) => (
           <span
@@ -110,45 +109,46 @@ export default function Skills() {
               animation: `float-particle ${p.dur} ${p.delay} ease-in-out infinite`,
             }}
           >
-            <p.Icon size={p.size} color="currentColor" className="text-blue-300" />
+            <p.Icon size={p.size} color="currentColor" className="text-sky-300" />
           </span>
         ))}
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="mb-12">
-          <div className="flex items-end gap-4">
-            <h2 className="text-3xl font-bold text-[#ccd6f6]">Technical Skills</h2>
-            <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent mb-1.5" />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          {groups.map(({ label, icon: Icon, color, skills }) => (
-            <div
-              key={label}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 transition-all duration-300 group"
-            >
-              <div className="flex items-center gap-2.5 mb-4">
-                <Icon size={16} className={color} />
-                <p className="font-mono text-xs uppercase tracking-wider text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
-                  {label}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {skills.map(({ name, Icon: SkillIcon }) => (
-                  <span
-                    key={name}
-                    className="flex items-center gap-1.5 px-3 py-1 bg-blue-600/10 border border-blue-500/20 text-[#ccd6f6] text-sm rounded-full hover:bg-blue-600/20 hover:border-blue-400/40 transition-colors duration-200 cursor-default"
-                  >
-                    {SkillIcon && <SkillIcon size={13} color="currentColor" className="opacity-80" />}
-                    {name}
-                  </span>
-                ))}
-              </div>
+        <FadeIn>
+          <div className="mb-12">
+            <div className="flex items-end gap-4">
+              <h2 className="text-3xl font-bold text-[#ccd6f6]">Technical Skills</h2>
+              <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
             </div>
+          </div>
+        </FadeIn>
+
+        <Stagger className="flex flex-col gap-4">
+          {groups.map(({ label, icon: Icon, color, skills }) => (
+            <StaggerItem key={label}>
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-sky-500/30 transition-all duration-300 group">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <Icon size={16} className={color} />
+                  <p className="font-mono text-xs uppercase tracking-wider text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
+                    {label}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {skills.map(({ name, Icon: SkillIcon }) => (
+                    <span
+                      key={name}
+                      className="flex items-center gap-1.5 px-3 py-1 bg-sky-600/10 border border-sky-500/20 text-[#ccd6f6] text-sm rounded-full hover:bg-sky-600/20 hover:border-sky-400/40 transition-colors duration-200 cursor-default"
+                    >
+                      {SkillIcon && <SkillIcon size={13} color="currentColor" className="opacity-80" />}
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );
