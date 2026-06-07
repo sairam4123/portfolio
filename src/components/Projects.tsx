@@ -56,10 +56,11 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <span className="text-blue-500/40 font-mono text-sm font-medium">04</span>
-          <h2 className="text-3xl font-bold text-[#ccd6f6]">Projects</h2>
-          <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent" />
+        <div className="mb-12">
+          <div className="flex items-end gap-4">
+            <h2 className="text-3xl font-bold text-[#ccd6f6]">Projects</h2>
+            <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent mb-1.5" />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

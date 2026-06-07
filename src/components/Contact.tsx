@@ -7,11 +7,8 @@ export default function Contact() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-blue-700/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-2xl mx-auto text-center relative z-10">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="flex-1 h-px bg-linear-to-r from-transparent to-blue-500/30" />
-          <span className="text-blue-500/50 font-mono text-sm">06</span>
+        <div className="mb-12">
           <h2 className="text-3xl font-bold text-[#ccd6f6]">Contact</h2>
-          <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent" />
         </div>
 
         <p className="text-[#8892b0] text-lg mb-10">

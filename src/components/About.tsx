@@ -2,10 +2,11 @@ export default function About() {
   return (
     <section id="about" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <span className="text-blue-500/40 font-mono text-sm font-medium">01</span>
-          <h2 className="text-3xl font-bold text-[#ccd6f6]">About Me</h2>
-          <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent" />
+        <div className="mb-12">
+          <div className="flex items-end gap-4">
+            <h2 className="text-3xl font-bold text-[#ccd6f6]">About Me</h2>
+            <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent mb-1.5" />
+          </div>
         </div>
 
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-blue-500/30 transition-colors duration-300">

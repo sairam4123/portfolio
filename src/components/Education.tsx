@@ -1,13 +1,14 @@
-import { GraduationCap, Award } from "lucide-react";
+import { GraduationCap, Award, Trophy } from "lucide-react";
 
 export default function Education() {
   return (
     <section id="education" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <span className="text-blue-500/40 font-mono text-sm font-medium">05</span>
-          <h2 className="text-3xl font-bold text-[#ccd6f6]">Education & Certifications</h2>
-          <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent" />
+        <div className="mb-12">
+          <div className="flex items-end gap-4">
+            <h2 className="text-3xl font-bold text-[#ccd6f6]">Education & Certifications</h2>
+            <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent mb-1.5" />
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -25,7 +26,7 @@ export default function Education() {
                   Expected 2027
                 </span>
               </div>
-              <p className="text-blue-400 text-sm mb-2">
+              <p className="text-[#a8b4d8] text-sm mb-2">
                 Mookambigai College of Engineering, Pudukkottai
               </p>
               <p className="text-[#8892b0] text-sm">
@@ -43,7 +44,7 @@ export default function Education() {
               <h3 className="text-[#ccd6f6] font-semibold mb-1">
                 Higher Secondary Certificate (HSC)
               </h3>
-              <p className="text-blue-400 text-sm mb-2">SFS School, Pudukkottai</p>
+              <p className="text-[#a8b4d8] text-sm mb-2">SFS School, Pudukkottai</p>
               <p className="text-[#8892b0] text-sm">
                 Score: <span className="text-cyan-400 font-semibold">527 / 600</span>
               </p>
@@ -60,11 +61,12 @@ export default function Education() {
                 <h3 className="text-[#ccd6f6] font-semibold">
                   Introduction to Large Language Models
                 </h3>
-                <span className="text-yellow-400 text-xs font-mono bg-yellow-600/10 border border-yellow-500/30 px-3 py-1 rounded-full whitespace-nowrap shrink-0">
-                  🥈 Silver Medal
+                <span className="flex items-center gap-1.5 text-yellow-400 text-xs font-mono bg-yellow-600/10 border border-yellow-500/30 px-3 py-1 rounded-full whitespace-nowrap shrink-0">
+                  <Trophy size={12} />
+                  Silver Medal
                 </span>
               </div>
-              <p className="text-blue-400 text-sm mb-2">NPTEL Certification</p>
+              <p className="text-[#a8b4d8] text-sm mb-2">NPTEL Certification</p>
               <p className="text-[#8892b0] text-sm">
                 Score: <span className="text-cyan-400 font-semibold">77%</span>
               </p>

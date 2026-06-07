@@ -1,56 +1,126 @@
 import { Code2, Layout, Server, Database, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import {
+  SiTypescript, SiJavascript, SiPython, SiGo, SiCplusplus, SiGodotengine,
+  SiReact, SiNextdotjs, SiExpo, SiTailwindcss, SiFramer,
+  SiFastapi, SiTrpc, SiDjango, SiExpress, SiRedis,
+  SiPostgresql, SiMysql, SiSupabase,
+  SiGit, SiGithub, SiDocker, SiVercel,
+} from "@icons-pack/react-simple-icons";
 
-const groups: { label: string; icon: LucideIcon; color: string; skills: string[] }[] = [
+const groups: { label: string; icon: LucideIcon; color: string; skills: { name: string; Icon?: React.ComponentType<{ size?: number; color?: string; className?: string }> }[] }[] = [
   {
     label: "Languages",
     icon: Code2,
     color: "text-violet-400",
-    skills: ["TypeScript", "JavaScript", "Python", "Go", "C", "C++", "GDScript"],
+    skills: [
+      { name: "TypeScript", Icon: SiTypescript },
+      { name: "JavaScript", Icon: SiJavascript },
+      { name: "Python", Icon: SiPython },
+      { name: "Go", Icon: SiGo },
+      { name: "C" },
+      { name: "C++", Icon: SiCplusplus },
+      { name: "GDScript", Icon: SiGodotengine },
+    ],
   },
   {
     label: "Frontend",
     icon: Layout,
     color: "text-blue-400",
-    skills: ["React", "Next.js", "React Native", "Expo", "Tailwind CSS", "Framer Motion"],
+    skills: [
+      { name: "React", Icon: SiReact },
+      { name: "Next.js", Icon: SiNextdotjs },
+      { name: "React Native", Icon: SiReact },
+      { name: "Expo", Icon: SiExpo },
+      { name: "Tailwind CSS", Icon: SiTailwindcss },
+      { name: "Framer Motion", Icon: SiFramer },
+    ],
   },
   {
     label: "Backend",
     icon: Server,
     color: "text-cyan-400",
     skills: [
-      "FastAPI",
-      "tRPC",
-      "Django",
-      "Express.js",
-      "Celery",
-      "Redis",
-      "REST APIs",
-      "Server-Sent Events",
+      { name: "FastAPI", Icon: SiFastapi },
+      { name: "tRPC", Icon: SiTrpc },
+      { name: "Django", Icon: SiDjango },
+      { name: "Express.js", Icon: SiExpress },
+      { name: "Celery" },
+      { name: "Redis", Icon: SiRedis },
+      { name: "REST APIs" },
+      { name: "Server-Sent Events" },
     ],
   },
   {
     label: "Databases",
     icon: Database,
     color: "text-emerald-400",
-    skills: ["PostgreSQL", "MySQL", "Supabase"],
+    skills: [
+      { name: "PostgreSQL", Icon: SiPostgresql },
+      { name: "MySQL", Icon: SiMysql },
+      { name: "Supabase", Icon: SiSupabase },
+    ],
   },
   {
     label: "Tools & Platforms",
     icon: Wrench,
     color: "text-orange-400",
-    skills: ["Git", "GitHub", "Docker", "Docker Compose", "Vercel", "Godot Engine"],
+    skills: [
+      { name: "Git", Icon: SiGit },
+      { name: "GitHub", Icon: SiGithub },
+      { name: "Docker", Icon: SiDocker },
+      { name: "Docker Compose", Icon: SiDocker },
+      { name: "Vercel", Icon: SiVercel },
+      { name: "Godot Engine", Icon: SiGodotengine },
+    ],
   },
+];
+
+// Floating logo particles in the background
+const particles = [
+  { Icon: SiTypescript,  x: 6,  y: 8,  size: 28, delay: "0s",    dur: "7s"   },
+  { Icon: SiPython,      x: 80, y: 5,  size: 24, delay: "1.2s",  dur: "6.5s" },
+  { Icon: SiReact,       x: 45, y: 3,  size: 32, delay: "2.4s",  dur: "5.8s" },
+  { Icon: SiDocker,      x: 90, y: 28, size: 26, delay: "0.6s",  dur: "8s"   },
+  { Icon: SiPostgresql,  x: 12, y: 60, size: 24, delay: "3.1s",  dur: "6.2s" },
+  { Icon: SiNextdotjs,   x: 65, y: 70, size: 28, delay: "1.7s",  dur: "7.4s" },
+  { Icon: SiGo,          x: 28, y: 82, size: 30, delay: "2.8s",  dur: "5.5s" },
+  { Icon: SiRedis,       x: 85, y: 65, size: 22, delay: "0.9s",  dur: "6.9s" },
+  { Icon: SiSupabase,    x: 3,  y: 38, size: 26, delay: "3.6s",  dur: "7.1s" },
+  { Icon: SiDjango,      x: 52, y: 50, size: 24, delay: "1.9s",  dur: "5.9s" },
+  { Icon: SiTailwindcss, x: 22, y: 20, size: 28, delay: "4.2s",  dur: "6.4s" },
+  { Icon: SiFastapi,     x: 70, y: 18, size: 26, delay: "2.1s",  dur: "7.7s" },
+  { Icon: SiVercel,      x: 38, y: 68, size: 22, delay: "0.4s",  dur: "8.2s" },
+  { Icon: SiGit,         x: 88, y: 85, size: 24, delay: "3.8s",  dur: "6s"   },
+  { Icon: SiGithub,      x: 55, y: 90, size: 28, delay: "1.4s",  dur: "7.3s" },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <span className="text-blue-500/40 font-mono text-sm font-medium">02</span>
-          <h2 className="text-3xl font-bold text-[#ccd6f6]">Technical Skills</h2>
-          <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent" />
+    <section id="skills" className="py-24 px-6 relative">
+      {/* Floating logo particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
+        {particles.map((p, i) => (
+          <span
+            key={i}
+            className="absolute opacity-[0.07]"
+            style={{
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              animation: `float-particle ${p.dur} ${p.delay} ease-in-out infinite`,
+            }}
+          >
+            <p.Icon size={p.size} color="currentColor" className="text-blue-300" />
+          </span>
+        ))}
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        <div className="mb-12">
+          <div className="flex items-end gap-4">
+            <h2 className="text-3xl font-bold text-[#ccd6f6]">Technical Skills</h2>
+            <div className="flex-1 h-px bg-linear-to-r from-blue-500/30 to-transparent mb-1.5" />
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -66,12 +136,13 @@ export default function Skills() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                {skills.map((s) => (
+                {skills.map(({ name, Icon: SkillIcon }) => (
                   <span
-                    key={s}
-                    className="px-3 py-1 bg-blue-600/10 border border-blue-500/20 text-[#ccd6f6] text-sm rounded-full hover:bg-blue-600/20 hover:border-blue-400/40 transition-colors duration-200 cursor-default"
+                    key={name}
+                    className="flex items-center gap-1.5 px-3 py-1 bg-blue-600/10 border border-blue-500/20 text-[#ccd6f6] text-sm rounded-full hover:bg-blue-600/20 hover:border-blue-400/40 transition-colors duration-200 cursor-default"
                   >
-                    {s}
+                    {SkillIcon && <SkillIcon size={13} color="currentColor" className="opacity-80" />}
+                    {name}
                   </span>
                 ))}
               </div>
