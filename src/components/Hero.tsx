@@ -17,8 +17,9 @@ function fadeUp(delay: number) {
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
-      <div className="absolute top-1/4 left-1/4 w-125 h-125 bg-sky-700/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-125 h-125 bg-sky-700/20 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-a 12s ease-in-out infinite' }} />
+      <div className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-b 15s ease-in-out infinite' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-900/10 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-c 18s ease-in-out infinite' }} />
 
       <div className="relative z-10 max-w-4xl">
         <motion.p {...fadeUp(0.1)} className="text-[#8892b0] text-lg mb-3">
@@ -48,14 +49,14 @@ export default function Hero() {
 
         <motion.h2
           {...fadeUp(0.4)}
-          className="text-lg md:text-xl text-[#8892b0] font-light mb-6 max-w-xl mx-auto"
+          className="text-lg md:text-xl text-slate-300 font-light mb-6 max-w-xl mx-auto"
         >
           Full Stack Developer &middot; Mobile Application Developer
         </motion.h2>
 
         <motion.p
           {...fadeUp(0.5)}
-          className="text-[#8892b0] text-sm mb-10 flex items-center justify-center gap-1.5"
+          className="text-slate-300 text-sm mb-10 flex items-center justify-center gap-1.5"
         >
           <MapPin size={14} className="text-sky-400 shrink-0" />
           Pudukkottai, Tamil Nadu, India

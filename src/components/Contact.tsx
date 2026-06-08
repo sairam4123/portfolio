@@ -24,10 +24,10 @@ export default function Contact() {
     <section id="contact" className="py-24 px-6 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-sky-700/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-2xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-[#ccd6f6]">Contact</h2>
+            <h2 className="text-3xl font-bold text-white">Contact</h2>
           </div>
         </FadeIn>
 
@@ -42,11 +42,11 @@ export default function Contact() {
         <FadeIn delay={0.15}>
           <form
             onSubmit={handleSubmit}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-10 hover:border-sky-500/20 transition-colors duration-300"
+            className="max-w-2xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-10 hover:border-sky-500/20 transition-colors duration-300"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
+                <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
                   Name
                 </label>
                 <input
@@ -59,7 +59,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
+                <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
                   Email
                 </label>
                 <input
@@ -74,7 +74,7 @@ export default function Contact() {
             </div>
 
             <div className="mb-6">
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
+              <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
                 Message
               </label>
               <textarea
@@ -98,7 +98,7 @@ export default function Contact() {
         </FadeIn>
 
         {/* Social links */}
-        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10" stagger={0.07}>
+        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto" stagger={0.07}>
           <StaggerItem>
             <a
               href="mailto:sairam.m.2005.65@gmail.com"

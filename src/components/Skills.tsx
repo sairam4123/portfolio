@@ -114,11 +114,11 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
-              <h2 className="text-3xl font-bold text-[#ccd6f6]">Technical Skills</h2>
+              <h2 className="text-3xl font-bold text-white">Technical Skills</h2>
               <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function Skills() {
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-sky-500/30 transition-all duration-300 group">
                 <div className="flex items-center gap-2.5 mb-4">
                   <Icon size={16} className={color} />
-                  <p className="font-mono text-xs uppercase tracking-wider text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
+                  <p className="font-mono text-xs uppercase text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
                     {label}
                   </p>
                 </div>

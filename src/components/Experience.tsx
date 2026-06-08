@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef, useState } from "react";
 import { ChevronRight, CalendarDays } from "lucide-react";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
@@ -31,14 +34,40 @@ const jobs = [
   },
 ];
 
+function GlowCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
+
+  return (
+    <div
+      ref={ref}
+      className="rounded-2xl p-px transition-all duration-300"
+      style={{
+        background: glow.active
+          ? `radial-gradient(350px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.5), rgba(255,255,255,0.08) 60%)`
+          : 'rgba(255,255,255,0.08)',
+      }}
+      onMouseMove={(e) => {
+        const r = ref.current!.getBoundingClientRect();
+        setGlow({ x: e.clientX - r.left, y: e.clientY - r.top, active: true });
+      }}
+      onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
+    >
+      <div className="bg-[#020c1b] rounded-2xl p-6 hover:bg-[#050f1e] transition-colors duration-300">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default function Experience() {
   return (
     <section id="experience" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
-              <h2 className="text-3xl font-bold text-[#ccd6f6]">Experience</h2>
+              <h2 className="text-3xl font-bold text-white">Experience</h2>
               <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
             </div>
           </div>
@@ -55,9 +84,9 @@ export default function Experience() {
                     <div className="w-2.5 h-2.5 rounded-full bg-sky-400" />
                   </div>
 
-                  <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-sky-500/30 hover:bg-white/[0.07] transition-all duration-300">
+                  <GlowCard>
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-1">
-                      <h3 className="text-[#ccd6f6] font-semibold text-lg">{job.title}</h3>
+                      <h3 className="text-white font-semibold text-lg">{job.title}</h3>
                       <span className="flex items-center gap-1.5 text-[#8892b0] text-sm italic">
                         <CalendarDays size={13} className="text-sky-400/70 shrink-0" />
                         {job.period}
@@ -84,7 +113,7 @@ export default function Experience() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </GlowCard>
                 </div>
               </StaggerItem>
             ))}

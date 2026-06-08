@@ -1,15 +1,27 @@
-import { ExternalLink, FolderOpen } from "lucide-react";
+'use client'
+
+import { useRef, useState } from "react";
+import { ExternalLink, Mic, School, Sparkles, TrainFront, Megaphone, Settings2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { YouTubeIcon } from "@/components/BrandIcons";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
-const projects = [
+const projects: {
+  name: string;
+  description: string;
+  tech: string[];
+  link: string;
+  type: "live" | "youtube";
+  Icon: LucideIcon;
+}[] = [
   {
     name: "Podolli AI",
     description:
       "AI-powered podcast generation platform that creates complete podcasts from arbitrary user-provided topics, with recommendation and trending systems.",
     tech: ["FastAPI", "Python", "React", "TypeScript", "Supabase", "PostgreSQL"],
     link: "https://podolli-ai.co.in",
-    type: "live" as const,
+    type: "live",
+    Icon: Mic,
   },
   {
     name: "MCE App",
@@ -17,7 +29,8 @@ const projects = [
       "College management platform for attendance tracking, on-duty forms, and academic records with an AI assistant (Gemini). Used by ~80% of students.",
     tech: ["React Native", "Expo", "Next.js", "TypeScript", "tRPC", "PostgreSQL", "Gemini"],
     link: "https://mceapp-v2.vercel.app/",
-    type: "live" as const,
+    type: "live",
+    Icon: School,
   },
   {
     name: "Ideas Tinder",
@@ -25,7 +38,8 @@ const projects = [
       "Swipe-based platform for discovering and matching with project ideas, helping developers find side projects to build.",
     tech: [],
     link: "https://ideas-tinder.vercel.app",
-    type: "live" as const,
+    type: "live",
+    Icon: Sparkles,
   },
   {
     name: "TRAX",
@@ -33,7 +47,8 @@ const projects = [
       "AI-assisted railway traffic control platform with Discrete Event Simulation for train throughput optimization. ~15% efficiency improvement. SIH25022.",
     tech: ["FastAPI", "Python", "PostgreSQL", "React", "Tailwind CSS", "DES"],
     link: "https://youtu.be/j4dJQz--pl8",
-    type: "youtube" as const,
+    type: "youtube",
+    Icon: TrainFront,
   },
   {
     name: "IRAS",
@@ -41,7 +56,8 @@ const projects = [
       "Automated railway announcement platform using live train data with multilingual TTS pipelines, scheduling, and prioritization.",
     tech: ["Python", "aiohttp", "BeautifulSoup", "Google TTS", "Pydub"],
     link: "https://youtu.be/cbsLe3v-Kz4",
-    type: "youtube" as const,
+    type: "youtube",
+    Icon: Megaphone,
   },
   {
     name: "Publication Summary Generator",
@@ -49,9 +65,36 @@ const projects = [
       "Microservices platform aggregating publications from Google Scholar & DBLP. Real-time SSE progress, export to PDF/Word/Excel, containerised with Docker. SIH1614.",
     tech: ["FastAPI", "Python", "Celery", "Redis", "Docker", "React", "Tailwind CSS"],
     link: "https://youtu.be/D6XI4GFsoec",
-    type: "youtube" as const,
+    type: "youtube",
+    Icon: Settings2,
   },
 ];
+
+function GlowCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
+
+  return (
+    <div
+      ref={ref}
+      className="rounded-2xl p-px h-full transition-all duration-300"
+      style={{
+        background: glow.active
+          ? `radial-gradient(300px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.5), rgba(255,255,255,0.08) 60%)`
+          : 'rgba(255,255,255,0.08)',
+      }}
+      onMouseMove={(e) => {
+        const r = ref.current!.getBoundingClientRect();
+        setGlow({ x: e.clientX - r.left, y: e.clientY - r.top, active: true });
+      }}
+      onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
+    >
+      <div className="group bg-[#020c1b] hover:bg-[#050f1e] rounded-2xl p-6 flex flex-col h-full transition-colors duration-300">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
   return (
@@ -60,7 +103,7 @@ export default function Projects() {
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
-              <h2 className="text-3xl font-bold text-[#ccd6f6]">Projects</h2>
+              <h2 className="text-3xl font-bold text-white">Projects</h2>
               <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
             </div>
           </div>
@@ -69,9 +112,9 @@ export default function Projects() {
         <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.07}>
           {projects.map((p) => (
             <StaggerItem key={p.name}>
-              <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col h-full hover:border-sky-500/40 hover:bg-white/[0.07] hover:shadow-[0_0_40px_rgba(14,165,233,0.08)] transition-all duration-300">
+              <GlowCard>
                 <div className="flex items-start justify-between mb-4">
-                  <FolderOpen
+                  <p.Icon
                     size={28}
                     className="text-sky-400/70 group-hover:text-sky-400 transition-colors duration-200"
                   />
@@ -86,7 +129,7 @@ export default function Projects() {
                   </a>
                 </div>
 
-                <h3 className="text-[#ccd6f6] font-semibold text-lg mb-2 group-hover:text-sky-300 transition-colors duration-200">
+                <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-sky-300 transition-colors duration-200">
                   {p.name}
                 </h3>
 
@@ -106,7 +149,7 @@ export default function Projects() {
                     ))}
                   </div>
                 )}
-              </div>
+              </GlowCard>
             </StaggerItem>
           ))}
         </Stagger>
