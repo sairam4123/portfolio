@@ -21,7 +21,7 @@ export default function Contact() {
     "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#ccd6f6] placeholder-[#8892b0]/50 text-sm focus:outline-none focus:border-sky-500/60 focus:bg-white/[0.07] transition-all duration-200";
 
   return (
-    <section id="contact" className="py-24 px-6 relative overflow-hidden">
+    <section id="contact" className="py-24 px-6 relative">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-sky-700/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">

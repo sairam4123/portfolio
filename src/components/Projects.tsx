@@ -13,6 +13,7 @@ const projects: {
   link: string;
   type: "live" | "youtube";
   Icon: LucideIcon;
+  sih?: string;
 }[] = [
   {
     name: "Podolli AI",
@@ -36,7 +37,7 @@ const projects: {
     name: "Ideas Tinder",
     description:
       "Swipe-based platform for discovering and matching with project ideas, helping developers find side projects to build.",
-    tech: [],
+    tech: ["React", "Expo", "tRPC", "Gemini", "PostgreSQL"],
     link: "https://ideas-tinder.vercel.app",
     type: "live",
     Icon: Sparkles,
@@ -44,11 +45,12 @@ const projects: {
   {
     name: "TRAX",
     description:
-      "AI-assisted railway traffic control platform with Discrete Event Simulation for train throughput optimization. ~15% efficiency improvement. SIH25022.",
+      "AI-assisted railway traffic control platform with Discrete Event Simulation for train throughput optimization. ~15% efficiency improvement.",
     tech: ["FastAPI", "Python", "PostgreSQL", "React", "Tailwind CSS", "DES"],
     link: "https://youtu.be/j4dJQz--pl8",
     type: "youtube",
     Icon: TrainFront,
+    sih: "SIH25022",
   },
   {
     name: "IRAS",
@@ -62,15 +64,16 @@ const projects: {
   {
     name: "Publication Summary Generator",
     description:
-      "Microservices platform aggregating publications from Google Scholar & DBLP. Real-time SSE progress, export to PDF/Word/Excel, containerised with Docker. SIH1614.",
+      "Microservices platform aggregating publications from Google Scholar & DBLP. Real-time SSE progress, export to PDF/Word/Excel, containerised with Docker.",
     tech: ["FastAPI", "Python", "Celery", "Redis", "Docker", "React", "Tailwind CSS"],
     link: "https://youtu.be/D6XI4GFsoec",
     type: "youtube",
     Icon: Settings2,
+    sih: "SIH1614",
   },
 ];
 
-function GlowCard({ children }: { children: React.ReactNode }) {
+function GlowCard({ children, sih }: { children: React.ReactNode; sih?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
 
@@ -84,7 +87,17 @@ function GlowCard({ children }: { children: React.ReactNode }) {
       }}
       onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
     >
-      <div className="group bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col h-full hover:bg-white/9 transition-colors duration-300">
+      <div className="group relative overflow-hidden bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col h-full hover:bg-white/9 transition-colors duration-300">
+        {sih && (
+          <div className="absolute overflow-hidden inset-0 rounded-2xl pointer-events-none">
+            <div
+              className="absolute bg-sky-500 text-white text-[10px] font-bold text-center py-0.5 tracking-widest"
+              style={{ width: 150, top: 9, left: -56, transform: 'rotate(-45deg)' }}
+            >
+              SIH
+            </div>
+          </div>
+        )}
         {children}
       </div>
       {/* border-only glow: masked to the 1px border area */}
@@ -106,8 +119,8 @@ function GlowCard({ children }: { children: React.ReactNode }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-24 px-6 relative">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
@@ -120,7 +133,7 @@ export default function Projects() {
         <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((p, i) => (
             <StaggerItem key={p.name} index={i}>
-              <GlowCard>
+              <GlowCard sih={p.sih}>
                 <div className="flex items-start justify-between mb-4">
                   <p.Icon
                     size={28}
@@ -137,11 +150,14 @@ export default function Projects() {
                   </a>
                 </div>
 
-                <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-sky-300 transition-colors duration-200">
+                <h3 className="text-white font-semibold text-lg mb-0.5 group-hover:text-sky-300 transition-colors duration-200">
                   {p.name}
                 </h3>
+                {p.sih && (
+                  <p className="text-sky-500/70 text-[12px] font-semibold mb-2">{p.sih}</p>
+                )}
 
-                <p className="text-[#8892b0] text-sm leading-relaxed flex-1 mb-5">
+                <p className="text-[#8892b0] text-sm leading-relaxed flex-1 mb-5 mt-1">
                   {p.description}
                 </p>
 

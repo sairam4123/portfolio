@@ -3,8 +3,8 @@ import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="education" className="py-24 px-6 relative">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
@@ -27,7 +27,7 @@ export default function Education() {
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
                   <h3 className="text-white font-semibold">
-                    Bachelor of Technology — Information Technology
+                    Bachelor of Technology - Information Technology
                   </h3>
                   <span className="text-sky-300 text-xs font-mono bg-sky-500/10 border border-sky-400/20 px-3 py-1 rounded-full whitespace-nowrap shrink-0">
                     Expected 2027

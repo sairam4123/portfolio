@@ -1,22 +1,26 @@
 'use client'
 
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { ChevronRight, CalendarDays } from "lucide-react";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
-const jobs = [
+const hi = (text: string) => (
+  <span className="text-slate-300 font-medium">{text}</span>
+);
+
+const jobs: { title: string; company: string; period: string; points: ReactNode[]; tech: string[] }[] = [
   {
     title: "Full Stack & Mobile Engineer",
     company: "Competitive Pro Gaming (CPG App)",
     period: "Feb 2024 – Present",
     points: [
-      "Contributed to transforming an early-stage prototype into a production-ready mobile platform.",
-      "Integrated EA Sports APIs and supporting backend systems.",
-      "Implemented internationalization (i18n) support for multiple regions and languages.",
-      "Redesigned premium subscription and in-app purchase workflows.",
-      "Developed tournament and EMEA competition management features.",
-      "Built image generation pipelines for lineups, leaderboards, and dynamic visual assets.",
-      "Worked across backend services, mobile applications, and deployment workflows.",
+      <>Contributed to transforming an early-stage prototype into a {hi("production-ready mobile platform")}.</>,
+      <>Integrated {hi("EA Sports APIs")} and supporting backend systems.</>,
+      <>Implemented {hi("internationalization (i18n)")} support for multiple regions and languages.</>,
+      <>Redesigned {hi("premium subscription")} and {hi("in-app purchase")} workflows.</>,
+      <>Developed {hi("tournament")} and {hi("EMEA competition management")} features.</>,
+      <>Built {hi("image generation pipelines")} for lineups, leaderboards, and dynamic visual assets.</>,
+      <>Worked across {hi("backend services")}, {hi("mobile applications")}, and {hi("deployment workflows")}.</>,
     ],
     tech: ["TypeScript", "React Native", "Expo", "PostgreSQL"],
   },
@@ -25,10 +29,10 @@ const jobs = [
     company: "Anicha Digital Infrastructure (Campuzone)",
     period: "Jun 2023 – Jan 2024",
     points: [
-      "Developed bulk data ingestion pipelines for student and staff onboarding.",
-      "Built attendance management functionality for educational institutions.",
-      "Implemented backend features and resolved production issues across the platform.",
-      "Worked with large-scale academic data entry and management workflows.",
+      <>Developed {hi("bulk data ingestion pipelines")} for student and staff onboarding.</>,
+      <>Built {hi("attendance management")} functionality for educational institutions.</>,
+      <>Implemented backend features and resolved {hi("production issues")} across the platform.</>,
+      <>Worked with {hi("large-scale academic data")} entry and management workflows.</>,
     ],
     tech: ["Python", "Django", "MySQL"],
   },
@@ -70,8 +74,8 @@ function GlowCard({ children }: { children: React.ReactNode }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="py-24 px-6 relative">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
@@ -95,8 +99,8 @@ export default function Experience() {
                   <GlowCard>
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-1">
                       <h3 className="text-white font-semibold text-lg">{job.title}</h3>
-                      <span className="flex items-center gap-1.5 text-[#8892b0] text-sm italic">
-                        <CalendarDays size={13} className="text-sky-400/70 shrink-0" />
+                      <span className="flex items-center gap-1.5 text-slate-300/80 text-sm font-semibold">
+                        <CalendarDays size={16} className="text-sky-400/70 shrink-0" />
                         {job.period}
                       </span>
                     </div>

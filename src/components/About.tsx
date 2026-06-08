@@ -2,8 +2,8 @@ import { FadeIn } from "@/components/animations";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="py-24 px-6 relative">
+      <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">

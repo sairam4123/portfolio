@@ -39,6 +39,26 @@ export function Stagger({ children, className }: { children: ReactNode; classNam
   return <div className={className}>{children}</div>
 }
 
+// Subtle atmospheric particles for section backgrounds — reuses hero-drift-* keyframes
+export function SectionParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
+      <div
+        className="absolute w-80 h-80 rounded-full blur-3xl bg-sky-800/10"
+        style={{ top: '-8%', left: '-6%', animation: 'hero-drift-a 16s ease-in-out infinite' }}
+      />
+      <div
+        className="absolute w-60 h-60 rounded-full blur-3xl bg-cyan-800/8"
+        style={{ bottom: '5%', right: '-4%', animation: 'hero-drift-b 20s ease-in-out infinite 3s' }}
+      />
+      <div
+        className="absolute w-44 h-44 rounded-full blur-2xl bg-sky-700/6"
+        style={{ top: '45%', right: '18%', animation: 'hero-drift-c 24s ease-in-out infinite 1.5s' }}
+      />
+    </div>
+  )
+}
+
 export function StaggerItem({
   children,
   className,
