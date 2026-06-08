@@ -34,41 +34,30 @@ export function FadeIn({ children, delay = 0, direction = 'up', className }: Fad
   )
 }
 
-interface StaggerProps {
-  children: ReactNode
-  className?: string
-  delay?: number
-  stagger?: number
+// Stagger is now a plain layout wrapper — each StaggerItem manages its own scroll trigger
+export function Stagger({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>
 }
 
-export function Stagger({ children, className, delay = 0, stagger = 0.12 }: StaggerProps) {
+export function StaggerItem({
+  children,
+  className,
+  index = 0,
+}: {
+  children: ReactNode
+  className?: string
+  index?: number
+}) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px 0px' })
+  const inView = useInView(ref, { once: true, margin: '-40px 0px' })
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial="hidden"
-      animate={inView ? 'show' : 'hidden'}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: stagger, delayChildren: delay } },
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
-      }}
+      initial={{ opacity: 0, y: 22 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, ease, delay: index * 0.08 }}
     >
       {children}
     </motion.div>

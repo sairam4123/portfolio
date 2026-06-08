@@ -125,8 +125,8 @@ export default function Skills() {
         </FadeIn>
 
         <Stagger className="flex flex-col gap-4">
-          {groups.map(({ label, icon: Icon, color, skills }) => (
-            <StaggerItem key={label}>
+          {groups.map(({ label, icon: Icon, color, skills }, i) => (
+            <StaggerItem key={label} index={i}>
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-sky-500/30 transition-all duration-300 group">
                 <div className="flex items-center gap-2.5 mb-4">
                   <Icon size={16} className={color} />

@@ -41,21 +41,29 @@ function GlowCard({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={ref}
-      className="rounded-2xl p-px transition-all duration-300"
-      style={{
-        background: glow.active
-          ? `radial-gradient(350px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.5), rgba(255,255,255,0.08) 60%)`
-          : 'rgba(255,255,255,0.08)',
-      }}
+      className="relative rounded-2xl"
       onMouseMove={(e) => {
         const r = ref.current!.getBoundingClientRect();
         setGlow({ x: e.clientX - r.left, y: e.clientY - r.top, active: true });
       }}
       onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
     >
-      <div className="bg-[#020c1b] rounded-2xl p-6 hover:bg-[#050f1e] transition-colors duration-300">
+      <div className="bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/9 transition-colors duration-300">
         {children}
       </div>
+      {/* border-only glow: masked to the 1px border area */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          opacity: glow.active ? 1 : 0,
+          transition: 'opacity 0.3s',
+          background: `radial-gradient(350px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.8), transparent 65%)`,
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          padding: '1px',
+        }}
+      />
     </div>
   );
 }
@@ -78,7 +86,7 @@ export default function Experience() {
 
           <Stagger className="flex flex-col gap-10">
             {jobs.map((job, i) => (
-              <StaggerItem key={i}>
+              <StaggerItem key={i} index={i}>
                 <div className="pl-16 relative">
                   <div className="absolute left-0 top-4 w-10 h-10 rounded-full bg-[#020c1b] border-2 border-sky-500/70 flex items-center justify-center shadow-[0_0_12px_rgba(14,165,233,0.3)]">
                     <div className="w-2.5 h-2.5 rounded-full bg-sky-400" />

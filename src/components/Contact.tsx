@@ -98,8 +98,8 @@ export default function Contact() {
         </FadeIn>
 
         {/* Social links */}
-        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto" stagger={0.07}>
-          <StaggerItem>
+        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto">
+          <StaggerItem index={0}>
             <a
               href="mailto:sairam.m.2005.65@gmail.com"
               className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
@@ -110,7 +110,7 @@ export default function Contact() {
             </a>
           </StaggerItem>
 
-          <StaggerItem>
+          <StaggerItem index={1}>
             <a
               href="tel:+917904302458"
               className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
@@ -121,7 +121,7 @@ export default function Contact() {
             </a>
           </StaggerItem>
 
-          <StaggerItem>
+          <StaggerItem index={2}>
             <a
               href="https://github.com/sairam4123"
               target="_blank"
@@ -134,7 +134,7 @@ export default function Contact() {
             </a>
           </StaggerItem>
 
-          <StaggerItem>
+          <StaggerItem index={3}>
             <a
               href="https://linkedin.com/in/sairam4123"
               target="_blank"

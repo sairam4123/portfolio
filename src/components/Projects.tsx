@@ -77,21 +77,29 @@ function GlowCard({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={ref}
-      className="rounded-2xl p-px h-full transition-all duration-300"
-      style={{
-        background: glow.active
-          ? `radial-gradient(300px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.5), rgba(255,255,255,0.08) 60%)`
-          : 'rgba(255,255,255,0.08)',
-      }}
+      className="relative rounded-2xl h-full"
       onMouseMove={(e) => {
         const r = ref.current!.getBoundingClientRect();
         setGlow({ x: e.clientX - r.left, y: e.clientY - r.top, active: true });
       }}
       onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
     >
-      <div className="group bg-[#020c1b] hover:bg-[#050f1e] rounded-2xl p-6 flex flex-col h-full transition-colors duration-300">
+      <div className="group bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col h-full hover:bg-white/9 transition-colors duration-300">
         {children}
       </div>
+      {/* border-only glow: masked to the 1px border area */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          opacity: glow.active ? 1 : 0,
+          transition: 'opacity 0.3s',
+          background: `radial-gradient(300px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.8), transparent 65%)`,
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          padding: '1px',
+        }}
+      />
     </div>
   );
 }
@@ -109,9 +117,9 @@ export default function Projects() {
           </div>
         </FadeIn>
 
-        <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.07}>
-          {projects.map((p) => (
-            <StaggerItem key={p.name}>
+        <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map((p, i) => (
+            <StaggerItem key={p.name} index={i}>
               <GlowCard>
                 <div className="flex items-start justify-between mb-4">
                   <p.Icon

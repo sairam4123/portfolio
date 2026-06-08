@@ -17,9 +17,9 @@ export default function Education() {
         </FadeIn>
 
         {/* Education */}
-        <Stagger className="flex flex-col gap-4 mb-10">
+        <Stagger className="flex flex-col gap-4 mb-4">
           {/* B.Tech */}
-          <StaggerItem>
+          <StaggerItem index={0}>
             <div className="bg-white/5 backdrop-blur-sm border border-sky-500/20 rounded-2xl p-6 hover:border-sky-500/40 hover:bg-white/[0.07] transition-all duration-300 flex gap-5 items-start">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-sky-500/15 border border-sky-400/25 flex items-center justify-center">
                 <GraduationCap size={22} className="text-sky-300" />
@@ -36,15 +36,15 @@ export default function Education() {
                 <p className="text-sky-400/80 text-sm mb-2">
                   Mookambigai College of Engineering, Pudukkottai
                 </p>
-                <p className="text-[#8892b0] text-sm">
-                  CGPA: <span className="text-emerald-400 font-semibold">8.66</span>
+                <p className="text-gray-300 text-sm">
+                  CGPA: <span className="text-sky-100 font-semibold">8.66</span>
                 </p>
               </div>
             </div>
           </StaggerItem>
 
           {/* HSC */}
-          <StaggerItem>
+          <StaggerItem index={1}>
             <div className="bg-white/5 backdrop-blur-sm border border-sky-500/20 rounded-2xl p-6 hover:border-sky-500/40 hover:bg-white/[0.07] transition-all duration-300 flex gap-5 items-start">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-sky-500/15 border border-sky-400/25 flex items-center justify-center">
                 <GraduationCap size={22} className="text-sky-300" />
@@ -53,9 +53,12 @@ export default function Education() {
                 <h3 className="text-white font-semibold mb-1">
                   Higher Secondary Certificate (HSC)
                 </h3>
-                <p className="text-sky-400/80 text-sm mb-2">SFS School, Pudukkottai</p>
-                <p className="text-[#8892b0] text-sm">
-                  Score: <span className="text-emerald-400 font-semibold">527 / 600</span>
+                <p className="text-sky-400/80 text-sm mb-2">
+                  SFS School, Pudukkottai
+                </p>
+                <p className="text-gray-300 text-sm">
+                  Score:{" "}
+                  <span className="text-sky-300 font-semibold">527 / 600</span>
                 </p>
               </div>
             </div>
@@ -65,7 +68,7 @@ export default function Education() {
         {/* Certifications */}
         <Stagger className="flex flex-col gap-4">
           {/* NPTEL */}
-          <StaggerItem>
+          <StaggerItem index={0}>
             <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-6 hover:border-cyan-400/40 hover:bg-white/[0.07] transition-all duration-300 flex gap-5 items-start">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center">
                 <Award size={22} className="text-cyan-300" />
@@ -80,9 +83,11 @@ export default function Education() {
                     Silver Medal
                   </span>
                 </div>
-                <p className="text-cyan-400/80 text-sm mb-2">NPTEL Certification</p>
-                <p className="text-[#8892b0] text-sm">
-                  Score: <span className="text-emerald-400 font-semibold">77%</span>
+                <p className="text-cyan-400/80 text-sm mb-2">
+                  NPTEL Certification
+                </p>
+                <p className="text-gray-300 text-sm">
+                  Score: <span className="text-sky-300 font-semibold">77%</span>
                 </p>
               </div>
             </div>
