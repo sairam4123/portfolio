@@ -1,7 +1,15 @@
-'use client'
+"use client";
 
 import { useRef, useState } from "react";
-import { ExternalLink, Mic, School, Sparkles, TrainFront, Megaphone, Settings2 } from "lucide-react";
+import {
+  ExternalLink,
+  Mic,
+  School,
+  Sparkles,
+  TrainFront,
+  Megaphone,
+  Settings2,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { YouTubeIcon } from "@/components/BrandIcons";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
@@ -19,7 +27,14 @@ const projects: {
     name: "Podolli AI",
     description:
       "AI-powered podcast generation platform that creates complete podcasts from arbitrary user-provided topics, with recommendation and trending systems.",
-    tech: ["FastAPI", "Python", "React", "TypeScript", "Supabase", "PostgreSQL"],
+    tech: [
+      "FastAPI",
+      "Python",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+    ],
     link: "https://podolli-ai.co.in",
     type: "live",
     Icon: Mic,
@@ -28,7 +43,15 @@ const projects: {
     name: "MCE App",
     description:
       "College management platform for attendance tracking, on-duty forms, and academic records with an AI assistant (Gemini). Used by ~80% of students.",
-    tech: ["React Native", "Expo", "Next.js", "TypeScript", "tRPC", "PostgreSQL", "Gemini"],
+    tech: [
+      "React Native",
+      "Expo",
+      "Next.js",
+      "TypeScript",
+      "tRPC",
+      "PostgreSQL",
+      "Gemini",
+    ],
     link: "https://mceapp-v2.vercel.app/",
     type: "live",
     Icon: School,
@@ -65,7 +88,15 @@ const projects: {
     name: "Publication Summary Generator",
     description:
       "Microservices platform aggregating publications from Google Scholar & DBLP. Real-time SSE progress, export to PDF/Word/Excel, containerised with Docker.",
-    tech: ["FastAPI", "Python", "Celery", "Redis", "Docker", "React", "Tailwind CSS"],
+    tech: [
+      "FastAPI",
+      "Python",
+      "Celery",
+      "Redis",
+      "Docker",
+      "React",
+      "Tailwind CSS",
+    ],
     link: "https://youtu.be/D6XI4GFsoec",
     type: "youtube",
     Icon: Settings2,
@@ -73,7 +104,13 @@ const projects: {
   },
 ];
 
-function GlowCard({ children, sih }: { children: React.ReactNode; sih?: string }) {
+function GlowCard({
+  children,
+  sih,
+}: {
+  children: React.ReactNode;
+  sih?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
 
@@ -92,7 +129,12 @@ function GlowCard({ children, sih }: { children: React.ReactNode; sih?: string }
           <div className="absolute overflow-hidden inset-0 rounded-2xl pointer-events-none">
             <div
               className="absolute bg-sky-500 text-white text-[10px] font-bold text-center py-0.5 tracking-widest"
-              style={{ width: 150, top: 9, left: -56, transform: 'rotate(-45deg)' }}
+              style={{
+                width: 150,
+                top: 9,
+                left: -56,
+                transform: "rotate(-45deg)",
+              }}
             >
               SIH
             </div>
@@ -105,12 +147,13 @@ function GlowCard({ children, sih }: { children: React.ReactNode; sih?: string }
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
           opacity: glow.active ? 1 : 0,
-          transition: 'opacity 0.3s',
+          transition: "opacity 0.3s",
           background: `radial-gradient(300px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.8), transparent 65%)`,
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-          padding: '1px',
+          WebkitMask:
+            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          padding: "1px",
         }}
       />
     </div>
@@ -134,7 +177,11 @@ export default function Projects() {
           {projects.map((p, i) => (
             <StaggerItem key={p.name} index={i}>
               <GlowCard sih={p.sih}>
-                <div className="flex items-start justify-between mb-4">
+                <div
+                  onClick={() => window.open(p.link, "_blank")}
+                  role="button"
+                  className="flex items-start justify-between mb-4"
+                >
                   <p.Icon
                     size={28}
                     className="text-sky-400/70 group-hover:text-sky-400 transition-colors duration-200"
@@ -144,9 +191,15 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#8892b0] hover:text-sky-400 transition-colors duration-200"
-                    aria-label={p.type === "youtube" ? "Watch demo" : "View live"}
+                    aria-label={
+                      p.type === "youtube" ? "Watch demo" : "View live"
+                    }
                   >
-                    {p.type === "youtube" ? <YouTubeIcon size={18} /> : <ExternalLink size={18} />}
+                    {p.type === "youtube" ? (
+                      <YouTubeIcon size={18} />
+                    ) : (
+                      <ExternalLink size={18} />
+                    )}
                   </a>
                 </div>
 
@@ -154,7 +207,9 @@ export default function Projects() {
                   {p.name}
                 </h3>
                 {p.sih && (
-                  <p className="text-sky-500/70 text-[12px] font-semibold mb-2">{p.sih}</p>
+                  <p className="text-sky-500/70 text-[12px] font-semibold mb-2">
+                    {p.sih}
+                  </p>
                 )}
 
                 <p className="text-[#8892b0] text-sm leading-relaxed flex-1 mb-5 mt-1">
