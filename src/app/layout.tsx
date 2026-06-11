@@ -77,7 +77,7 @@ export default function RootLayout({
     name: "Sairam Mangeshkar",
     url: "https://sairamthedev.vercel.app",
     email: "mailto:sairam.m.2005.65@gmail.com",
-    jobTitle: "Full Stack Developer",
+    jobTitle: "Full Stack & Mobile Application Developer",
     knowsAbout: [
       "TypeScript",
       "Python",
