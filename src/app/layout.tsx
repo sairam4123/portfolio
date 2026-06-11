@@ -13,11 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sairamthedev.vercel.app"),
   title: "Sairam Mangeshkar - Portfolio",
   description:
-    "Full Stack Developer · Backend Engineer · Mobile Application Developer. Building production systems with TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
-  abstract: `
-  Sairam Mangeshkar's portfolio showcases his expertise as a Full Stack Developer, Backend Engineer, and Mobile Application Developer. With a strong focus on building production systems, Sairam excels in technologies such as TypeScript, Python, React Native, FastAPI, and PostgreSQL. His projects demonstrate a commitment to creating efficient and scalable solutions across various domains.`,
+    "Full Stack Developer, Backend Engineer, and Mobile App Developer building AI applications, attendance management systems, startup discovery platforms, and simulation software. Experienced in TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
   keywords: [
     "Sairam Mangeshkar",
     "Full Stack Developer",
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "Sairam Mangeshkar Portfolio",
     images: [
       {
-        url: "https://sairamthedev.vercel.app/og-image.png",
+        url: "/og-image.png",
         alt: "Sairam Mangeshkar Portfolio",
       },
     ],
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
     creator: "@sairamthedev",
     images: [
       {
-        url: "https://sairamthedev.vercel.app/og-image.png",
+        url: "/og-image.png",
         alt: "Sairam Mangeshkar Portfolio",
       },
     ],
@@ -96,7 +95,7 @@ export default function RootLayout({
       "https://linkedin.com/in/sairam4123",
     ],
   };
-  
+
   return (
     <html
       lang="en"
