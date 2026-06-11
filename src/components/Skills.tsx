@@ -1,15 +1,45 @@
 import { Code2, Layout, Server, Database, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import {
-  SiTypescript, SiJavascript, SiPython, SiGo, SiCplusplus, SiGodotengine,
-  SiReact, SiNextdotjs, SiExpo, SiTailwindcss, SiFramer,
-  SiFastapi, SiTrpc, SiDjango, SiExpress, SiRedis,
-  SiPostgresql, SiMysql, SiSupabase,
-  SiGit, SiGithub, SiDocker, SiVercel,
+  SiTypescript,
+  SiJavascript,
+  SiPython,
+  SiGo,
+  SiCplusplus,
+  SiGodotengine,
+  SiReact,
+  SiNextdotjs,
+  SiExpo,
+  SiTailwindcss,
+  SiFramer,
+  SiFastapi,
+  SiTrpc,
+  SiDjango,
+  SiExpress,
+  SiRedis,
+  SiPostgresql,
+  SiMysql,
+  SiSupabase,
+  SiGit,
+  SiGithub,
+  SiDocker,
+  SiVercel,
 } from "@icons-pack/react-simple-icons";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 
-const groups: { label: string; icon: LucideIcon; color: string; skills: { name: string; Icon?: React.ComponentType<{ size?: number; color?: string; className?: string }> }[] }[] = [
+const groups: {
+  label: string;
+  icon: LucideIcon;
+  color: string;
+  skills: {
+    name: string;
+    Icon?: React.ComponentType<{
+      size?: number;
+      color?: string;
+      className?: string;
+    }>;
+  }[];
+}[] = [
   {
     label: "Languages",
     icon: Code2,
@@ -78,27 +108,30 @@ const groups: { label: string; icon: LucideIcon; color: string; skills: { name: 
 ];
 
 const particles = [
-  { Icon: SiTypescript,  x: 6,  y: 8,  size: 28, delay: "0s",    dur: "7s"   },
-  { Icon: SiPython,      x: 80, y: 5,  size: 24, delay: "1.2s",  dur: "6.5s" },
-  { Icon: SiReact,       x: 45, y: 3,  size: 32, delay: "2.4s",  dur: "5.8s" },
-  { Icon: SiDocker,      x: 90, y: 28, size: 26, delay: "0.6s",  dur: "8s"   },
-  { Icon: SiPostgresql,  x: 12, y: 60, size: 24, delay: "3.1s",  dur: "6.2s" },
-  { Icon: SiNextdotjs,   x: 65, y: 70, size: 28, delay: "1.7s",  dur: "7.4s" },
-  { Icon: SiGo,          x: 28, y: 82, size: 30, delay: "2.8s",  dur: "5.5s" },
-  { Icon: SiRedis,       x: 85, y: 65, size: 22, delay: "0.9s",  dur: "6.9s" },
-  { Icon: SiSupabase,    x: 3,  y: 38, size: 26, delay: "3.6s",  dur: "7.1s" },
-  { Icon: SiDjango,      x: 52, y: 50, size: 24, delay: "1.9s",  dur: "5.9s" },
-  { Icon: SiTailwindcss, x: 22, y: 20, size: 28, delay: "4.2s",  dur: "6.4s" },
-  { Icon: SiFastapi,     x: 70, y: 18, size: 26, delay: "2.1s",  dur: "7.7s" },
-  { Icon: SiVercel,      x: 38, y: 68, size: 22, delay: "0.4s",  dur: "8.2s" },
-  { Icon: SiGit,         x: 88, y: 85, size: 24, delay: "3.8s",  dur: "6s"   },
-  { Icon: SiGithub,      x: 55, y: 90, size: 28, delay: "1.4s",  dur: "7.3s" },
+  { Icon: SiTypescript, x: 6, y: 8, size: 28, delay: "0s", dur: "7s" },
+  { Icon: SiPython, x: 80, y: 5, size: 24, delay: "1.2s", dur: "6.5s" },
+  { Icon: SiReact, x: 45, y: 3, size: 32, delay: "2.4s", dur: "5.8s" },
+  { Icon: SiDocker, x: 90, y: 28, size: 26, delay: "0.6s", dur: "8s" },
+  { Icon: SiPostgresql, x: 12, y: 60, size: 24, delay: "3.1s", dur: "6.2s" },
+  { Icon: SiNextdotjs, x: 65, y: 70, size: 28, delay: "1.7s", dur: "7.4s" },
+  { Icon: SiGo, x: 28, y: 82, size: 30, delay: "2.8s", dur: "5.5s" },
+  { Icon: SiRedis, x: 85, y: 65, size: 22, delay: "0.9s", dur: "6.9s" },
+  { Icon: SiSupabase, x: 3, y: 38, size: 26, delay: "3.6s", dur: "7.1s" },
+  { Icon: SiDjango, x: 52, y: 50, size: 24, delay: "1.9s", dur: "5.9s" },
+  { Icon: SiTailwindcss, x: 22, y: 20, size: 28, delay: "4.2s", dur: "6.4s" },
+  { Icon: SiFastapi, x: 70, y: 18, size: 26, delay: "2.1s", dur: "7.7s" },
+  { Icon: SiVercel, x: 38, y: 68, size: 22, delay: "0.4s", dur: "8.2s" },
+  { Icon: SiGit, x: 88, y: 85, size: 24, delay: "3.8s", dur: "6s" },
+  { Icon: SiGithub, x: 55, y: 90, size: 28, delay: "1.4s", dur: "7.3s" },
 ];
 
 export default function Skills() {
   return (
     <section id="skills" className="py-24 px-6 relative">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none select-none"
+        aria-hidden
+      >
         {particles.map((p, i) => (
           <span
             key={i}
@@ -109,7 +142,11 @@ export default function Skills() {
               animation: `float-particle ${p.dur} ${p.delay} ease-in-out infinite`,
             }}
           >
-            <p.Icon size={p.size} color="currentColor" className="text-sky-300" />
+            <p.Icon
+              size={p.size}
+              color="currentColor"
+              className="text-sky-300"
+            />
           </span>
         ))}
       </div>
@@ -118,7 +155,9 @@ export default function Skills() {
         <FadeIn>
           <div className="mb-12">
             <div className="flex items-end gap-4">
-              <h2 className="text-3xl font-bold text-white">Technical Skills</h2>
+              <h2 className="text-3xl font-bold text-white">
+                Technical Skills
+              </h2>
               <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
             </div>
           </div>
@@ -130,7 +169,7 @@ export default function Skills() {
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 hover:border-sky-500/30 transition-all duration-300 group">
                 <div className="flex items-center gap-2.5 mb-4">
                   <Icon size={16} className={color} />
-                  <p className="font-mono text-xs uppercase text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
+                  <p className="font-semibold text-xs uppercase text-[#8892b0] group-hover:text-[#ccd6f6] transition-colors duration-200">
                     {label}
                   </p>
                 </div>
@@ -140,7 +179,13 @@ export default function Skills() {
                       key={name}
                       className="flex items-center gap-1.5 px-3 py-1 bg-sky-600/10 border border-sky-500/20 text-[#ccd6f6] text-sm rounded-full hover:bg-sky-600/20 hover:border-sky-400/40 transition-colors duration-200 cursor-default"
                     >
-                      {SkillIcon && <SkillIcon size={13} color="currentColor" className="opacity-80" />}
+                      {SkillIcon && (
+                        <SkillIcon
+                          size={13}
+                          color="currentColor"
+                          className="opacity-80"
+                        />
+                      )}
                       {name}
                     </span>
                   ))}

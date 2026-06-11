@@ -17,11 +17,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#020c1b]/80 backdrop-blur-md border-b border-white/5">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl bg-[#020c1b]/80 backdrop-blur-md border border-white/10 rounded-full shadow-lg shadow-cyan-600/5">
+      <div className="px-6 py-4 flex items-center justify-between">
         <a
           href="#"
-          className="text-xl font-bold bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
+          className="text-xl font-bold bg-linear-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
         >
           SM
         </a>
@@ -31,7 +31,7 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[#8892b0] hover:text-blue-400 transition-colors duration-200 text-sm font-medium"
+              className="text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm font-medium"
             >
               {l.label}
             </a>
@@ -40,7 +40,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-[#8892b0] hover:text-blue-400 transition-colors"
+          className="md:hidden text-[#8892b0] hover:text-sky-400 transition-colors"
           aria-label="Toggle menu"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -48,13 +48,13 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-[#020c1b]/95 border-t border-white/5 px-6 py-4 flex flex-col gap-5">
+        <div className="md:hidden border-t border-white/5 px-6 py-4 flex flex-col gap-5">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-[#8892b0] hover:text-blue-400 transition-colors text-sm font-medium"
+              className="text-[#8892b0] hover:text-sky-400 transition-colors text-sm font-medium"
             >
               {l.label}
             </a>

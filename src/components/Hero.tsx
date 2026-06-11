@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import { Mail, ArrowDown, MapPin } from "lucide-react";
@@ -17,31 +17,49 @@ function fadeUp(delay: number) {
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
-      <div className="absolute top-1/4 left-1/4 w-125 h-125 bg-sky-700/20 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-a 12s ease-in-out infinite' }} />
-      <div className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-b 15s ease-in-out infinite' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-900/10 rounded-full blur-3xl pointer-events-none" style={{ animation: 'hero-drift-c 18s ease-in-out infinite' }} />
+      <div
+        className="absolute top-1/4 left-1/4 w-125 h-125 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
+        style={{ animation: "hero-drift-a 12s ease-in-out infinite" }}
+      />
+      <div
+        className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none"
+        style={{ animation: "hero-drift-b 15s ease-in-out infinite" }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-900/10 rounded-full blur-3xl pointer-events-none"
+        style={{ animation: "hero-drift-c 18s ease-in-out infinite" }}
+      />
 
       <div className="relative z-10 max-w-4xl">
-        <motion.p {...fadeUp(0.1)} className="text-[#8892b0] text-lg mb-3">
+        <motion.p
+          {...fadeUp(0.1)}
+          className="text-[#8892b0] font-medium text-lg mb-3"
+        >
           Hello, I&apos;m
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 22, backgroundPosition: '0% 50%' }}
+          initial={{ opacity: 0, y: 22, backgroundPosition: "0% 50%" }}
           animate={{
             opacity: 1,
             y: 0,
-            backgroundPosition: ['0% 50%', '200% 50%'],
+            backgroundPosition: ["0% 50%", "200% 50%"],
           }}
           transition={{
             opacity: { duration: 0.75, delay: 0.25, ease },
             y: { duration: 0.75, delay: 0.25, ease },
-            backgroundPosition: { duration: 4, ease: 'linear', repeat: Infinity, repeatType: 'loop' },
+            backgroundPosition: {
+              duration: 4,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: "loop",
+            },
           }}
           className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent mb-5 leading-tight"
           style={{
-            backgroundImage: 'linear-gradient(90deg, #0ea5e9, #7dd3fc, #f0f9ff, #7dd3fc, #0ea5e9)',
-            backgroundSize: '200% auto',
+            backgroundImage:
+              "linear-gradient(90deg, #0ea5e9, #7dd3fc, #f0f9ff, #7dd3fc, #0ea5e9)",
+            backgroundSize: "200% auto",
           }}
         >
           Sairam Mangeshkar
