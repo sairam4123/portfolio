@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, ArrowDown, MapPin } from "lucide-react";
+import { Mail, ArrowDown, MapPin, Download } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/BrandIcons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -16,17 +16,17 @@ function fadeUp(delay: number) {
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
+    <section className="min-h-[85vh] flex flex-col items-center justify-center text-center px-6 pb-20 md:pb-0 relative overflow-hidden">
       <div
-        className="absolute top-1/4 left-1/4 w-125 h-125 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
+        className="absolute top-1/3 left-1/4 w-96 h-96 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-a 12s ease-in-out infinite" }}
       />
       <div
-        className="absolute bottom-1/4 right-1/4 w-100 h-100 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-b 15s ease-in-out infinite" }}
       />
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-900/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-sky-900/15 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-c 18s ease-in-out infinite" }}
       />
 
@@ -55,7 +55,7 @@ export default function Hero() {
               repeatType: "loop",
             },
           }}
-          className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent mb-5 leading-tight"
+          className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent mb-5 leading-tight"
           style={{
             backgroundImage:
               "linear-gradient(90deg, #0ea5e9, #7dd3fc, #f0f9ff, #7dd3fc, #0ea5e9)",
@@ -67,17 +67,18 @@ export default function Hero() {
 
         <motion.h2
           {...fadeUp(0.4)}
-          className="text-lg md:text-xl text-slate-300 font-light mb-6 max-w-xl mx-auto"
+          className="text-sm md:text-xl text-slate-300 font-light mb-3 max-w-2xl mx-auto flex items-center justify-center gap-2 flex-wrap"
         >
-          Full Stack Developer &middot; Mobile Application Developer
+          Full Stack Developer &amp; Mobile App Developer &middot; Pudukkottai,
+          Tamil Nadu
         </motion.h2>
 
         <motion.p
           {...fadeUp(0.5)}
-          className="text-slate-300 text-sm mb-10 flex items-center justify-center gap-1.5"
+          className="text-[#8892b0] text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed"
         >
-          <MapPin size={14} className="text-sky-400 shrink-0" />
-          Pudukkottai, Tamil Nadu, India
+          Building mobile applications, AI products, and railway simulation
+          systems.
         </motion.p>
 
         <motion.div
@@ -91,10 +92,12 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="#contact"
-            className="px-7 py-3 border border-sky-500/50 hover:border-sky-400 text-sky-400 hover:text-sky-300 rounded-lg font-semibold transition-colors duration-200"
+            href="/Sairam%20Mangeshkar%20Resume.docx"
+            download="Sairam Mangeshkar Resume.docx"
+            className="px-7 py-3 border border-sky-500/50 hover:border-sky-400 text-sky-400 hover:text-sky-300 rounded-lg font-semibold transition-colors duration-200 flex items-center gap-2"
           >
-            Contact Me
+            <Download size={16} />
+            Download Resume
           </a>
         </motion.div>
 
@@ -131,15 +134,6 @@ export default function Hero() {
           </a>
         </motion.div>
       </div>
-
-      <motion.a
-        {...fadeUp(0.9)}
-        href="#about"
-        className="absolute bottom-8 text-[#8892b0] hover:text-sky-400 animate-bounce transition-colors duration-200"
-        aria-label="Scroll down"
-      >
-        <ArrowDown size={24} />
-      </motion.a>
     </section>
   );
 }

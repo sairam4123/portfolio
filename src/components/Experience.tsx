@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { ChevronDown, CalendarDays } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import { GlowCard } from "@/components/GlowCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -77,48 +78,6 @@ const jobs: {
   },
 ];
 
-function GlowCard({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
-
-  return (
-    <div
-      ref={ref}
-      className="relative rounded-2xl"
-      onMouseMove={(e) => {
-        const r = ref.current!.getBoundingClientRect();
-        setGlow({ x: e.clientX - r.left, y: e.clientY - r.top, active: true });
-      }}
-      onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
-    >
-      <div className="bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/9 transition-colors duration-300">
-        {/* clickable header area */}
-        <div className="cursor-pointer select-none" onClick={onClick}>
-          {children}
-        </div>
-      </div>
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          opacity: glow.active ? 1 : 0,
-          transition: "opacity 0.3s",
-          background: `radial-gradient(350px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.8), transparent 65%)`,
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-          padding: "1px",
-        }}
-      />
-    </div>
-  );
-}
 
 function JobCard({
   job,
@@ -130,7 +89,7 @@ function JobCard({
   onToggle: () => void;
 }) {
   return (
-    <GlowCard onClick={onToggle}>
+    <GlowCard onClick={onToggle} className="">
       {/* always-visible header */}
       <div className="px-6 pt-6 pb-5">
         <div className="flex items-start justify-between gap-3 mb-0.5">
