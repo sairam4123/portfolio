@@ -55,8 +55,12 @@ export default function About() {
               <StaggerItem key={label} index={i}>
                 <GlowCard>
                   <div className="flex flex-col items-center justify-center text-center h-full">
-                    <span className="text-4xl font-bold text-sky-400 mb-1">{value}</span>
-                    <span className="text-[#8892b0] text-sm font-medium">{label}</span>
+                    <span className="text-4xl font-bold text-sky-400 mb-1">
+                      {value}
+                    </span>
+                    <span className="text-[#8892b0] text-sm font-medium">
+                      {label}
+                    </span>
                   </div>
                 </GlowCard>
               </StaggerItem>

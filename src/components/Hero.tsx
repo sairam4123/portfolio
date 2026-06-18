@@ -16,7 +16,7 @@ function fadeUp(delay: number) {
 
 export default function Hero() {
   return (
-    <section className="min-h-[85vh] flex flex-col items-center justify-center text-center px-6 pb-20 md:pb-0 relative overflow-hidden">
+    <section className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 pb-20 md:pb-0 md:py-8 pt-16 relative overflow-hidden">
       <div
         className="absolute top-1/3 left-1/4 w-96 h-96 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-a 12s ease-in-out infinite" }}
