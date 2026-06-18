@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { YouTubeIcon } from "@/components/BrandIcons";
-import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import { FadeIn, Stagger, StaggerItem, FloatingParticles } from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
 import { projects } from "@/data/projects";
 
 export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6 relative">
+      <FloatingParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">

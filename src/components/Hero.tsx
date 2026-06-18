@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Download } from "lucide-react";
+import { Mail, Download, ArrowRight } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/BrandIcons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -18,15 +18,15 @@ export default function Hero() {
   return (
     <section className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 pb-20 md:pb-0 md:py-8 pt-16 relative overflow-hidden">
       <div
-        className="absolute top-1/3 left-1/4 w-96 h-96 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
+        className="absolute top-1/4 left-1/4 w-80 h-80 bg-sky-700/20 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-a 12s ease-in-out infinite" }}
       />
       <div
-        className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-cyan-700/15 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-b 15s ease-in-out infinite" }}
       />
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-sky-900/15 rounded-full blur-3xl pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-sky-900/15 rounded-full blur-3xl pointer-events-none"
         style={{ animation: "hero-drift-c 18s ease-in-out infinite" }}
       />
 
@@ -86,9 +86,10 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            className="px-7 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-semibold transition-colors duration-200 shadow-[0_0_20px_rgba(14,165,233,0.3)]"
+            className="px-7 py-3 flex items-center gap-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-semibold transition-colors duration-200 animate-[glow-pulse_3s_ease-in-out_infinite]"
           >
             View Projects
+            <ArrowRight size={16} />
           </a>
           <a
             href="/Sairam%20Mangeshkar%20Resume.docx"

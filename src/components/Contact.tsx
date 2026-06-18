@@ -1,9 +1,14 @@
-'use client'
+"use client";
 
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, Send } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/BrandIcons";
-import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import {
+  FadeIn,
+  Stagger,
+  StaggerItem,
+  FloatingParticles,
+} from "@/components/animations";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -13,7 +18,9 @@ export default function Contact() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const subject = encodeURIComponent(`Portfolio Contact — ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    );
     window.location.href = `mailto:sairam.m.2005.65@gmail.com?subject=${subject}&body=${body}`;
   }
 
@@ -22,136 +29,186 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 px-6 relative">
+      <FloatingParticles />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-sky-700/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-white">Contact</h2>
+          <div className="mb-12">
+            <div className="flex items-end gap-4">
+              <h2 className="text-3xl font-bold text-white">Contact</h2>
+              <div className="flex-1 h-px bg-linear-to-r from-sky-500/30 to-transparent mb-1.5" />
+            </div>
+            <p className="text-[#8892b0] text-base mt-4">
+              Open to new opportunities, collaborations, and interesting
+              conversations. Feel free to reach out!
+            </p>
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.08}>
-          <p className="text-[#8892b0] text-lg mb-10 text-center">
-            Open to new opportunities, collaborations, and interesting conversations. Feel free to
-            reach out!
-          </p>
-        </FadeIn>
-
-        {/* Contact form */}
         <FadeIn delay={0.15}>
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-2xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 mb-10 hover:border-sky-500/20 transition-colors duration-300"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
-                Message
-              </label>
-              <textarea
-                required
-                rows={5}
-                placeholder="What's on your mind?"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className={`${inputClass} resize-none`}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-medium transition-colors duration-200 shadow-[0_0_20px_rgba(14,165,233,0.25)]"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Contact form */}
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 hover:border-sky-500/20 transition-colors duration-300"
             >
-              <Send size={15} />
-              Send Message
-            </button>
-          </form>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-xs font-mono uppercase text-[#8892b0] mb-2">
+                  Message
+                </label>
+                <textarea
+                  required
+                  rows={5}
+                  placeholder="What's on your mind?"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-medium transition-colors duration-200 shadow-[0_0_20px_rgba(14,165,233,0.25)]"
+              >
+                <Send size={15} />
+                Send Message
+              </button>
+            </form>
+
+            {/* Contact info */}
+            <Stagger className="grid grid-cols-2 lg:grid-cols-1 gap-4">
+              <StaggerItem index={0}>
+                <a
+                  href="mailto:sairam.m.2005.65@gmail.com"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  aria-label="Email"
+                >
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
+                    <Mail
+                      size={18}
+                      className="text-sky-400 group-hover:scale-110 transition-transform duration-200"
+                    />
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <p className="text-xs font-mono uppercase text-[#8892b0] mb-0.5">
+                      Email
+                    </p>
+                    <p className="text-[#ccd6f6] text-sm truncate">
+                      sairam.m.2005.65@gmail.com
+                    </p>
+                  </div>
+                </a>
+              </StaggerItem>
+
+              <StaggerItem index={1}>
+                <a
+                  href="tel:+917904302458"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  aria-label="Phone"
+                >
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
+                    <Phone
+                      size={18}
+                      className="text-sky-400 group-hover:scale-110 transition-transform duration-200"
+                    />
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <p className="text-xs font-mono uppercase text-[#8892b0] mb-0.5">
+                      Phone
+                    </p>
+                    <p className="text-[#ccd6f6] text-sm">+91 79043 02458</p>
+                  </div>
+                </a>
+              </StaggerItem>
+
+              <StaggerItem index={2}>
+                <a
+                  href="https://github.com/sairam4123"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  aria-label="GitHub"
+                >
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
+                    <GitHubIcon
+                      size={18}
+                      className="text-sky-400 group-hover:scale-110 transition-transform duration-200"
+                    />
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <p className="text-xs font-mono uppercase text-[#8892b0] mb-0.5">
+                      GitHub
+                    </p>
+                    <p className="text-[#ccd6f6] text-sm truncate">
+                      github.com/sairam4123
+                    </p>
+                  </div>
+                </a>
+              </StaggerItem>
+
+              <StaggerItem index={3}>
+                <a
+                  href="https://linkedin.com/in/sairam4123"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  aria-label="LinkedIn"
+                >
+                  <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
+                    <LinkedInIcon
+                      size={18}
+                      className="text-sky-400 group-hover:scale-110 transition-transform duration-200"
+                    />
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <p className="text-xs font-mono uppercase text-[#8892b0] mb-0.5">
+                      LinkedIn
+                    </p>
+                    <p className="text-[#ccd6f6] text-sm truncate">
+                      linkedin.com/in/sairam4123
+                    </p>
+                  </div>
+                </a>
+              </StaggerItem>
+            </Stagger>
+          </div>
         </FadeIn>
-
-        {/* Social links */}
-        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-2xl mx-auto">
-          <StaggerItem index={0}>
-            <a
-              href="mailto:sairam.m.2005.65@gmail.com"
-              className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
-              aria-label="Email"
-            >
-              <Mail size={24} className="text-sky-400 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-[#8892b0] text-xs">Email</span>
-            </a>
-          </StaggerItem>
-
-          <StaggerItem index={1}>
-            <a
-              href="tel:+917904302458"
-              className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
-              aria-label="Phone"
-            >
-              <Phone size={24} className="text-sky-400 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-[#8892b0] text-xs">Phone</span>
-            </a>
-          </StaggerItem>
-
-          <StaggerItem index={2}>
-            <a
-              href="https://github.com/sairam4123"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
-              aria-label="GitHub"
-            >
-              <GitHubIcon size={24} className="text-sky-400 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-[#8892b0] text-xs">GitHub</span>
-            </a>
-          </StaggerItem>
-
-          <StaggerItem index={3}>
-            <a
-              href="https://linkedin.com/in/sairam4123"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              <LinkedInIcon size={24} className="text-sky-400 group-hover:scale-110 transition-transform duration-200" />
-              <span className="text-[#8892b0] text-xs">LinkedIn</span>
-            </a>
-          </StaggerItem>
-        </Stagger>
       </div>
 
       <div className="mt-20 text-center">
         <p className="text-[#8892b0]/50 text-xs">
-          Built with Next.js &amp; Tailwind CSS &nbsp;·&nbsp; Sairam Mangeshkar © 2026
+          Built with Next.js &amp; Tailwind CSS &nbsp;·&nbsp; Sairam Mangeshkar
+          © 2026
         </p>
       </div>
     </section>

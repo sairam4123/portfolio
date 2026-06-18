@@ -3,7 +3,7 @@
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { ChevronDown, CalendarDays } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import { FadeIn, Stagger, StaggerItem, FloatingParticles } from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -199,6 +199,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="py-24 px-6 relative">
+      <FloatingParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">

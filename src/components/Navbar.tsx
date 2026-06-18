@@ -4,54 +4,84 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#achievements", label: "Achievements" },
-  { href: "#education", label: "Education" },
-  { href: "#contact", label: "Contact" },
+const NAV_LINKS = [
+  { label: "About",        anchor: "about"        },
+  { label: "Projects",     anchor: "projects"     },
+  { label: "Skills",       anchor: "skills"       },
+  { label: "Experience",   anchor: "experience"   },
+  { label: "Achievements", anchor: "achievements" },
+  { label: "Education",    anchor: "education"    },
+  { label: "Contact",      anchor: "contact"      },
 ];
 
-export default function Navbar() {
+const pillClass =
+  "flex items-center bg-[#020c1b]/80 backdrop-blur-md border border-sky-500/20 rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_18px_rgba(14,165,233,0.08)]";
+
+export default function Navbar({ variant = "home" }: { variant?: "home" | "project" }) {
   const [open, setOpen] = useState(false);
+
+  const links = NAV_LINKS.map((l) => ({
+    label: l.label,
+    href: variant === "project" ? `/#${l.anchor}` : `#${l.anchor}`,
+  }));
+
+  const logoHref = variant === "project" ? "/" : "#";
 
   return (
     <>
-      {/* Desktop: floating pill navbar */}
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        className="hidden md:flex fixed top-5 left-1/2 -translate-x-1/2 z-50 items-center gap-8 bg-[#020c1b]/80 backdrop-blur-md border border-white/10 rounded-full px-8 py-3 shadow-lg shadow-black/40"
-      >
-        <a
-          href="#"
-          className="text-lg font-bold bg-linear-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
+      {/* Desktop: floating pill (home) or top-attached bar (project) */}
+      {variant === "home" ? (
+        <motion.nav
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className={`hidden md:flex fixed top-5 left-1/2 -translate-x-1/2 z-50 gap-8 px-8 py-3 ${pillClass}`}
         >
-          SM
-        </a>
-        {links.map((l) => (
           <a
-            key={l.href}
-            href={l.href}
-            className="text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm font-medium"
+            href={logoHref}
+            className="text-lg font-bold bg-linear-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
           >
-            {l.label}
+            SM
           </a>
-        ))}
-      </motion.nav>
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm font-medium"
+            >
+              {l.label}
+            </a>
+          ))}
+        </motion.nav>
+      ) : (
+        <nav className="hidden md:flex sticky top-0 z-50 items-center gap-8 px-8 py-4 bg-[#020c1b]/90 backdrop-blur-md border-b border-white/10">
+          <a
+            href={logoHref}
+            className="text-lg font-bold bg-linear-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
+          >
+            SM
+          </a>
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm font-medium"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+      )}
 
-      {/* Mobile: floating bottom pill navbar */}
+      {/* Mobile: floating bottom pill */}
       <motion.nav
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="md:hidden fixed bottom-5 left-1/2 w-[calc(100%-4rem)] -translate-x-1/2 z-50 flex items-center gap-4 bg-[#020c1b]/80 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 shadow-lg shadow-black/40"
+        className={`md:hidden fixed bottom-5 left-1/2 w-[calc(100%-4rem)] -translate-x-1/2 z-50 gap-4 px-6 py-3 ${pillClass}`}
       >
         <a
-          href="#"
+          href={logoHref}
           className="text-lg font-bold bg-linear-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wider"
         >
           SM

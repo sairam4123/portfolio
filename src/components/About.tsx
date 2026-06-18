@@ -1,5 +1,9 @@
 import { GraduationCap, Layers, Train, Code2 } from "lucide-react";
-import { FadeIn, StaggerItem } from "@/components/animations";
+import {
+  FadeIn,
+  StaggerItem,
+  FloatingParticles,
+} from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
 
 const stats = [
@@ -39,6 +43,7 @@ const points = [
 export default function About() {
   return (
     <section id="about" className="pt-8 pb-24 px-6 relative">
+      <FloatingParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
@@ -53,7 +58,7 @@ export default function About() {
           <div className="grid grid-cols-2 gap-4 h-full">
             {stats.map(({ value, label }, i) => (
               <StaggerItem key={label} index={i}>
-                <GlowCard>
+                <GlowCard glowCircleSize={100}>
                   <div className="flex flex-col items-center justify-center text-center h-full">
                     <span className="text-4xl font-bold text-sky-400 mb-1">
                       {value}

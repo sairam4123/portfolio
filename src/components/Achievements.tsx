@@ -1,6 +1,11 @@
 import { Trophy, BookOpen, Award, Gamepad2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import {
+  FadeIn,
+  Stagger,
+  StaggerItem,
+  FloatingParticles,
+} from "@/components/animations";
 
 const hi = (text: string) => (
   <span className="text-white font-semibold">{text}</span>
@@ -61,6 +66,7 @@ const achievements: {
 export default function Achievements() {
   return (
     <section id="achievements" className="py-24 px-6 relative">
+      <FloatingParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">
@@ -74,13 +80,13 @@ export default function Achievements() {
         <Stagger className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {achievements.map((a, i) => (
             <StaggerItem key={i} index={i}>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex gap-5 items-start hover:border-white/20 hover:bg-white/[0.07] transition-all duration-300">
+              <div className="bg-white/5 h-full backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex gap-5 items-center hover:border-white/20 hover:bg-white/[0.07] transition-all duration-300">
                 <div
                   className={`shrink-0 w-12 h-12 rounded-xl ${a.bg} border ${a.border} flex items-center justify-center`}
                 >
                   <a.icon size={22} className={a.color} />
                 </div>
-                <p className="text-[#8892b0] text-sm leading-relaxed pt-3">
+                <p className="text-[#8892b0] text-sm leading-relaxed">
                   {a.content}
                 </p>
               </div>

@@ -7,11 +7,13 @@ export function GlowCard({
   sih,
   className,
   onClick,
+  glowCircleSize = 200,
 }: {
   children: React.ReactNode;
   sih?: string;
   className?: string;
   onClick?: () => void;
+  glowCircleSize?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [glow, setGlow] = useState({ x: 0, y: 0, active: false });
@@ -22,7 +24,11 @@ export function GlowCard({
       className="relative h-full rounded-2xl"
       onMouseMove={(e) => {
         const rect = ref.current!.getBoundingClientRect();
-        setGlow({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
+        setGlow({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+          active: true,
+        });
       }}
       onMouseLeave={() => setGlow((g) => ({ ...g, active: false }))}
     >
@@ -33,8 +39,9 @@ export function GlowCard({
           opacity: glow.active ? 1 : 0,
           transition: "opacity 300ms ease",
           padding: "1px",
-          background: `radial-gradient(300px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.9), transparent 65%)`,
-          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          background: `radial-gradient(${glowCircleSize}px circle at ${glow.x}px ${glow.y}px, rgba(14,165,233,0.9), transparent 65%)`,
+          WebkitMask:
+            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
@@ -49,7 +56,12 @@ export function GlowCard({
           <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
             <div
               className="absolute bg-sky-500 py-0.5 text-center text-[10px] font-bold tracking-widest text-white"
-              style={{ width: 150, top: 10, left: -56, transform: "rotate(-45deg)" }}
+              style={{
+                width: 150,
+                top: 10,
+                left: -56,
+                transform: "rotate(-45deg)",
+              }}
             >
               SIH
             </div>

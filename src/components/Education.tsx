@@ -1,9 +1,10 @@
 import { GraduationCap, Award, Trophy } from "lucide-react";
-import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
+import { FadeIn, Stagger, StaggerItem, FloatingParticles } from "@/components/animations";
 
 export default function Education() {
   return (
     <section id="education" className="py-24 px-6 relative">
+      <FloatingParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <FadeIn>
           <div className="mb-12">

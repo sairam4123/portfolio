@@ -5,7 +5,8 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { projects } from "@/data/projects";
 import { GlowCard } from "@/components/GlowCard";
 import { YouTubeIcon } from "@/components/BrandIcons";
-import { SectionParticles } from "@/components/animations";
+import { FloatingParticles } from "@/components/animations";
+import Navbar from "@/components/Navbar";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -36,19 +37,17 @@ export default async function ProjectPage({
 
   return (
     <div className="min-h-screen bg-[#020c1b] text-white relative overflow-hidden">
-      <SectionParticles />
-      {/* Top nav */}
-      <div className="max-w-7xl mx-auto px-6 py-6">
+      <FloatingParticles />
+      <Navbar variant="project" />
+
+      <main className="max-w-7xl mx-auto px-6 pt-8 pb-24">
         <Link
           href="/#projects"
-          className="inline-flex items-center gap-2 text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm"
+          className="inline-flex items-center gap-2 text-[#8892b0] hover:text-sky-400 transition-colors duration-200 text-sm mb-8"
         >
           <ArrowLeft size={15} />
           Back to Projects
         </Link>
-      </div>
-
-      <main className="max-w-7xl mx-auto px-6 pb-24">
         {project.youtubeId ? (
           /* Two-column layout for projects with a video */
           <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-start">
