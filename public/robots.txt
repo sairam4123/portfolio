@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sairamthedev.vercel.app/sitemap.xml
