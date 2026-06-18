@@ -21,7 +21,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sairamthedev.vercel.app"),
   title: "Sairam Mangeshkar - Portfolio",
   description:
-    "Full Stack & Mobile App Developer building AI products, mobile apps, and railway simulation systems. Skilled in TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
+    "Full Stack & Mobile Developer building AI products, mobile apps, and railway simulations. Skilled in  Python, React Native, FastAPI, and PostgreSQL.".slice(
+      0,
+      160,
+    ), // Truncate to 160 chars for meta description
   keywords: [
     "Sairam Mangeshkar",
     "Full Stack Developer",
@@ -39,7 +42,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sairam Mangeshkar - Portfolio",
     description:
-      "Full Stack Developer · Backend Engineer · Mobile Application Developer. Building production systems with TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
+      "Full Stack & Mobile Developer building AI products, mobile apps, and railway simulations. Skilled in  Python, React Native, FastAPI, and PostgreSQL.".slice(
+        0,
+        160,
+      ),
     url: "https://sairamthedev.vercel.app",
     siteName: "Sairam Mangeshkar Portfolio",
     images: [
@@ -58,7 +64,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sairam Mangeshkar - Portfolio",
     description:
-      "Full Stack Developer · Backend Engineer · Mobile Application Developer. Building production systems with TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
+      "Full Stack & Mobile Developer building AI products, mobile apps, and railway simulations. Skilled in  Python, React Native, FastAPI, and PostgreSQL.".slice(
+        0,
+        160,
+      ),
     creator: "@sairamthedev",
     images: [
       {

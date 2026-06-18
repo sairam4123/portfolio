@@ -23,7 +23,7 @@ export async function generateMetadata({
   return {
     title: `${project.name} | by Sairam Mangeshkar`,
     keywords: project.tech,
-    description: project.description,
+    description: project.description.slice(0, 160), // Truncate to 160 chars for meta description
     alternates: {
       canonical: `https://sairamthedev.vercel.app/projects/${slug}`,
     },
