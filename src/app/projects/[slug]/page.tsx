@@ -21,8 +21,24 @@ export async function generateMetadata({
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.name} — Sairam Mangeshkar`,
+    title: `${project.name} | by Sairam Mangeshkar`,
+    keywords: project.tech,
     description: project.description,
+    alternates: {
+      canonical: `https://sairamthedev.vercel.app/projects/${slug}`,
+    },
+    openGraph: {
+      title: `${project.name} | by Sairam Mangeshkar`,
+      description: project.description,
+      url: `https://sairamthedev.vercel.app/projects/${slug}`,
+      siteName: "Sairam Mangeshkar Portfolio",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} | by Sairam Mangeshkar`,
+      description: project.description,
+      creator: "@sairamthedev",
+    },
   };
 }
 
