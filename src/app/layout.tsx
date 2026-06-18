@@ -106,6 +106,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <meta
+        name="google-site-verification"
+        content="p2mObECcwD76yuSTVmUFxTNjas4aarJc-IFxo0L4-r8"
+      />
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
