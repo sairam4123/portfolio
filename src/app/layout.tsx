@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sairamthedev.vercel.app"),
   title: "Sairam Mangeshkar - Portfolio",
   description:
-    "Full Stack Developer, Backend Engineer, and Mobile App Developer building AI applications, attendance management systems, startup discovery platforms, and simulation software. Experienced in TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
+    "Full Stack & Mobile App Developer building AI products, mobile apps, and railway simulation systems. Skilled in TypeScript, Python, React Native, FastAPI, and PostgreSQL.",
   keywords: [
     "Sairam Mangeshkar",
     "Full Stack Developer",
@@ -45,6 +45,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og-image.png",
+        width: 1200,
+        height: 630,
         alt: "Sairam Mangeshkar Portfolio",
       },
     ],
@@ -64,6 +66,11 @@ export const metadata: Metadata = {
         alt: "Sairam Mangeshkar Portfolio",
       },
     ],
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 
   alternates: {
