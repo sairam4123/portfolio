@@ -1,108 +1,11 @@
 "use client";
 
-import {
-  ExternalLink,
-  Mic,
-  School,
-  Sparkles,
-  TrainFront,
-  Megaphone,
-  Settings2,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import { YouTubeIcon } from "@/components/BrandIcons";
 import { FadeIn, Stagger, StaggerItem } from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
-
-const projects: {
-  name: string;
-  description: string;
-  tech: string[];
-  link: string;
-  type: "live" | "youtube";
-  Icon: LucideIcon;
-  sih?: string;
-}[] = [
-  {
-    name: "Podolli AI",
-    description:
-      "AI-powered podcast generation platform that creates complete podcasts from arbitrary user-provided topics, with recommendation and trending systems.",
-    tech: [
-      "FastAPI",
-      "Python",
-      "React",
-      "TypeScript",
-      "Supabase",
-      "PostgreSQL",
-    ],
-    link: "https://podolli-ai.co.in",
-    type: "live",
-    Icon: Mic,
-  },
-  {
-    name: "MCE App",
-    description:
-      "College management platform for attendance tracking, on-duty forms, and academic records with an AI assistant (Gemini). Used by ~80% of students.",
-    tech: [
-      "React Native",
-      "Expo",
-      "Next.js",
-      "TypeScript",
-      "tRPC",
-      "PostgreSQL",
-      "Gemini",
-    ],
-    link: "https://mceapp-v2.vercel.app/",
-    type: "live",
-    Icon: School,
-  },
-  {
-    name: "Ideas Tinder",
-    description:
-      "Swipe-based platform for discovering and matching with project ideas, helping developers find side projects to build.",
-    tech: ["React", "Expo", "tRPC", "Gemini", "PostgreSQL"],
-    link: "https://ideas-tinder.vercel.app",
-    type: "live",
-    Icon: Sparkles,
-  },
-  {
-    name: "TRAX",
-    description:
-      "AI-assisted railway traffic control platform with Discrete Event Simulation for train throughput optimization. ~15% efficiency improvement.",
-    tech: ["FastAPI", "Python", "PostgreSQL", "React", "Tailwind CSS", "DES"],
-    link: "https://youtu.be/j4dJQz--pl8",
-    type: "youtube",
-    Icon: TrainFront,
-    sih: "SIH25022",
-  },
-  {
-    name: "IRAS",
-    description:
-      "Automated railway announcement platform using live train data with multilingual TTS pipelines, scheduling, and prioritization.",
-    tech: ["Python", "aiohttp", "BeautifulSoup", "Google TTS", "Pydub"],
-    link: "https://youtu.be/cbsLe3v-Kz4",
-    type: "youtube",
-    Icon: Megaphone,
-  },
-  {
-    name: "Publication Summary Generator",
-    description:
-      "Microservices platform aggregating publications from Google Scholar & DBLP. Real-time SSE progress, export to PDF/Word/Excel, containerised with Docker.",
-    tech: [
-      "FastAPI",
-      "Python",
-      "Celery",
-      "Redis",
-      "Docker",
-      "React",
-      "Tailwind CSS",
-    ],
-    link: "https://youtu.be/D6XI4GFsoec",
-    type: "youtube",
-    Icon: Settings2,
-    sih: "SIH1614",
-  },
-];
+import { projects } from "@/data/projects";
 
 export default function Projects() {
   return (
@@ -121,11 +24,7 @@ export default function Projects() {
           {projects.map((p, i) => (
             <StaggerItem key={p.name} index={i}>
               <GlowCard sih={p.sih}>
-                <div
-                  onClick={() => window.open(p.link, "_blank")}
-                  role="button"
-                  className="flex items-start justify-between mb-4"
-                >
+                <div className="flex items-start justify-between mb-4">
                   <p.Icon
                     size={28}
                     className="text-sky-400/70 group-hover:text-sky-400 transition-colors duration-200"
@@ -138,6 +37,7 @@ export default function Projects() {
                     aria-label={
                       p.type === "youtube" ? "Watch demo" : "View live"
                     }
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {p.type === "youtube" ? (
                       <YouTubeIcon size={18} />
@@ -147,9 +47,11 @@ export default function Projects() {
                   </a>
                 </div>
 
-                <h3 className="text-white font-semibold text-lg mb-0.5 group-hover:text-sky-300 transition-colors duration-200">
-                  {p.name}
-                </h3>
+                <Link href={`/projects/${p.slug}`} className="block">
+                  <h3 className="text-white font-semibold text-lg mb-0.5 hover:text-sky-300 transition-colors duration-200">
+                    {p.name}
+                  </h3>
+                </Link>
                 {p.sih && (
                   <p className="text-sky-500/70 text-[12px] font-semibold mb-2">
                     {p.sih}
