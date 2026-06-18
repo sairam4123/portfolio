@@ -4,7 +4,7 @@ import { GlowCard } from "@/components/GlowCard";
 
 const stats = [
   { value: "3+", label: "Years Experience" },
-  { value: "6+", label: "Projects" },
+  { value: "9+", label: "Projects" },
   { value: "10+", label: "Symposium Wins" },
   { value: "2", label: "Professional Roles" },
 ];
@@ -20,7 +20,7 @@ const points = [
   },
   {
     icon: Train,
-    text: "Developed railway simulation and automation tools used in real-world environments.",
+    text: "Developed railway simulation and automation tools used for traffic modeling and optimization.",
   },
   {
     icon: Code2,

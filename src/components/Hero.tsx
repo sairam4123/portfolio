@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, ArrowDown, MapPin, Download } from "lucide-react";
+import { Mail, Download } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/BrandIcons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -69,8 +69,7 @@ export default function Hero() {
           {...fadeUp(0.4)}
           className="text-sm md:text-xl text-slate-300 font-light mb-3 max-w-2xl mx-auto flex items-center justify-center gap-2 flex-wrap"
         >
-          Full Stack Developer &amp; Mobile App Developer &middot; Pudukkottai,
-          Tamil Nadu
+          Full-Stack &amp; Mobile App Developer &middot; Pudukkottai, India
         </motion.h2>
 
         <motion.p
