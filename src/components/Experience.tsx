@@ -1,12 +1,27 @@
 "use client";
 
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  useState,
+  useSyncExternalStore,
+  useRef,
+  useEffect,
+  useCallback,
+  type ReactNode,
+} from "react";
 import { ChevronDown, CalendarDays } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FadeIn, Stagger, StaggerItem, FloatingParticles } from "@/components/animations";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+import { FadeIn, FloatingParticles } from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+// fraction of parent scrollYProgress over which each card fades/slides in
+const REVEAL_WINDOW = 0.14;
 
 const hi = (text: string) => (
   <span className="text-slate-300 font-medium">{text}</span>
@@ -78,7 +93,6 @@ const jobs: {
   },
 ];
 
-
 function JobCard({
   job,
   isOpen,
@@ -90,10 +104,11 @@ function JobCard({
 }) {
   return (
     <GlowCard onClick={onToggle} className="">
-      {/* always-visible header */}
       <div className="px-6 pt-6 pb-5">
         <div className="flex items-start justify-between gap-3 mb-0.5">
-          <h3 className="text-white font-semibold text-lg leading-snug">{job.title}</h3>
+          <h3 className="text-white font-semibold text-lg leading-snug">
+            {job.title}
+          </h3>
           <div className="flex items-center gap-3 shrink-0 mt-0.5">
             <span className="hidden md:flex items-center gap-1.5 text-slate-300/80 text-sm font-semibold">
               <CalendarDays size={16} className="text-sky-400/70 shrink-0" />
@@ -114,7 +129,6 @@ function JobCard({
         </span>
       </div>
 
-      {/* expandable content */}
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
@@ -127,7 +141,6 @@ function JobCard({
           >
             <div className="px-6 pb-6">
               <div className="h-px bg-white/8 mb-5" />
-
               <ul className="flex flex-col gap-2.5 mb-5">
                 {job.points.map((p, j) => (
                   <motion.li
@@ -144,7 +157,6 @@ function JobCard({
                   </motion.li>
                 ))}
               </ul>
-
               <div className="flex flex-wrap gap-2">
                 {job.tech.map((t, k) => (
                   <motion.span
@@ -170,6 +182,203 @@ function JobCard({
   );
 }
 
+// ─── Each card reveals when the timeline line reaches its dot ─────────────────
+function TimelineItem({
+  job,
+  parentProgress,
+  threshold,
+  dotRef,
+  isOpen,
+  onToggle,
+}: {
+  job: (typeof jobs)[number];
+  parentProgress: MotionValue<number>;
+  threshold: number;
+  dotRef: (el: HTMLDivElement | null) => void;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
+  const t0 = threshold;
+  const t1 = Math.min(t0 + REVEAL_WINDOW, 1);
+
+  // Dot is part of the scroll/line — appears when the tip reaches it, no x-slide
+  const dotT0 = Math.max(0, t0 - 0.04);
+  const dotT1 = dotT0 + 0.08;
+  const dotOpacity = useTransform(parentProgress, [dotT0, dotT1], [0, 1]);
+  const dotInnerScale = useTransform(parentProgress, [dotT0, dotT1], [0, 1]);
+  const dotInnerOpacity = useTransform(parentProgress, [dotT0, dotT1], [0, 0.9]);
+  const borderColor = useTransform(parentProgress, [dotT0, t1], [
+    "rgba(14,165,233,0.18)",
+    "rgba(14,165,233,0.82)",
+  ]);
+  const boxShadow = useTransform(parentProgress, [dotT0, t1], [
+    "0 0 0px rgba(14,165,233,0.00), 0 0 0px rgba(56,189,248,0.00)",
+    "0 0 18px rgba(14,165,233,0.50), 0 0 5px rgba(56,189,248,0.75)",
+  ]);
+
+  // Card + connector slide in after the dot has appeared
+  const cardOpacity = useTransform(parentProgress, [t0, t1], [0, 1]);
+  const cardX = useTransform(parentProgress, [t0, t1], [36, 0]);
+  const connectorScale = useTransform(parentProgress, [t0, t1], [0, 1]);
+
+  return (
+    <div className="pl-16 relative">
+      {/* Connector — appears with the card, not the dot */}
+      <motion.div
+        className="absolute h-px bg-sky-500/25"
+        style={{
+          left: 40,
+          top: "2.25rem",
+          width: 24,
+          transformOrigin: "left",
+          scaleX: connectorScale,
+          opacity: connectorScale,
+        }}
+      />
+
+      {/* Dot — part of the scroll timeline, stays on the line (no x-translate) */}
+      <motion.div
+        ref={dotRef}
+        className="absolute left-0 top-4 w-10 h-10 rounded-full bg-[#020c1b] border-2 flex items-center justify-center"
+        style={{ opacity: dotOpacity, borderColor, boxShadow }}
+      >
+        <motion.div
+          className="w-2.5 h-2.5 rounded-full bg-sky-400"
+          style={{ scale: dotInnerScale, opacity: dotInnerOpacity }}
+        />
+      </motion.div>
+
+      {/* Card slides in from the right after the dot appears */}
+      <motion.div style={{ opacity: cardOpacity, x: cardX }}>
+        <JobCard job={job} isOpen={isOpen} onToggle={onToggle} />
+      </motion.div>
+    </div>
+  );
+}
+
+// ─── Container: owns the scroll progress and recomputes thresholds on resize ──
+function AnimatedTimeline({
+  isOpen,
+  onToggle,
+}: {
+  isOpen: (i: number) => boolean;
+  onToggle: (i: number) => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Initial estimates (overwritten after mount by real measurements)
+  const [thresholds, setThresholds] = useState<number[]>(() =>
+    jobs.map((_, i) => 0.05 + (i / Math.max(jobs.length - 1, 1)) * 0.8),
+  );
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.85", "end 0.2"],
+  });
+
+  // Measure each dot's position relative to the container and normalise by
+  // container height → threshold in [0,1] matching scrollYProgress scale.
+  // Called on mount AND whenever the container resizes (card toggle changes height).
+  const recompute = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const cr = container.getBoundingClientRect();
+    if (cr.height === 0) return;
+    const next = dotRefs.current.map((dot) => {
+      if (!dot) return 0.05;
+      const dr = dot.getBoundingClientRect();
+      return Math.max(0, (dr.top - cr.top) / cr.height);
+    });
+    setThresholds(next);
+  }, []);
+
+  useEffect(() => {
+    recompute();
+    const ro = new ResizeObserver(recompute);
+    if (containerRef.current) ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, [recompute]);
+
+  const lineH = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const tipTop = useTransform(scrollYProgress, (v) => `${v * 100}%`);
+  const tipOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.03, 0.97, 1],
+    [0, 1, 1, 0],
+  );
+
+  return (
+    <div ref={containerRef} className="relative">
+      {/* Faint track (always visible) */}
+      <div className="absolute left-5 top-2 bottom-2 w-px bg-slate-800/70" />
+
+      {/* Scroll-driven fill */}
+      <div className="absolute left-5 top-2 bottom-2 w-px overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute inset-x-0 top-0"
+          style={{
+            height: lineH,
+            background:
+              "linear-gradient(to bottom, #38bdf8, rgba(14,165,233,0.55) 60%, rgba(14,165,233,0.12))",
+          }}
+        />
+      </div>
+
+      {/* Glow blur layer */}
+      <div
+        className="absolute left-5 top-2 bottom-2 pointer-events-none"
+        style={{ width: 1 }}
+      >
+        <motion.div
+          className="absolute top-0"
+          style={{
+            height: lineH,
+            width: 8,
+            left: -3.5,
+            background:
+              "linear-gradient(to bottom, rgba(56,189,248,0.65), rgba(14,165,233,0.25), transparent)",
+            filter: "blur(4px)",
+          }}
+        />
+      </div>
+
+      {/* Traveling tip dot */}
+      <motion.div
+        className="absolute left-5 pointer-events-none z-20"
+        style={{ top: tipTop, opacity: tipOpacity, marginLeft: -7, marginTop: -7 }}
+      >
+        <motion.div
+          className="w-3.5 h-3.5 rounded-full bg-sky-300"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          style={{
+            boxShadow:
+              "0 0 10px 3px rgba(56,189,248,0.8), 0 0 24px 6px rgba(14,165,233,0.38)",
+          }}
+        />
+      </motion.div>
+
+      {/* Items — each card waits for the line to reach its dot */}
+      <div className="flex flex-col gap-10">
+        {jobs.map((job, i) => (
+          <TimelineItem
+            key={i}
+            job={job}
+            parentProgress={scrollYProgress}
+            threshold={thresholds[i] ?? 0.05}
+            dotRef={(el) => {
+              dotRefs.current[i] = el;
+            }}
+            isOpen={isOpen(i)}
+            onToggle={() => onToggle(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function useIsDesktop() {
   return useSyncExternalStore(
     (cb) => {
@@ -184,7 +393,6 @@ function useIsDesktop() {
 
 export default function Experience() {
   const isDesktop = useIsDesktop();
-  // overrides: explicitly toggled cards override the desktop default
   const [overrides, setOverrides] = useState<Map<number, boolean>>(new Map());
 
   const isOpen = (i: number) =>
@@ -210,26 +418,7 @@ export default function Experience() {
           </div>
         </FadeIn>
 
-        <div className="relative">
-          <div className="absolute left-5 top-2 bottom-2 w-px bg-linear-to-b from-sky-500/50 via-sky-500/20 to-transparent" />
-
-          <Stagger className="flex flex-col gap-10">
-            {jobs.map((job, i) => (
-              <StaggerItem key={i} index={i}>
-                <div className="pl-16 relative">
-                  <div className="absolute left-0 top-4 w-10 h-10 rounded-full bg-[#020c1b] border-2 border-sky-500/70 flex items-center justify-center shadow-[0_0_12px_rgba(14,165,233,0.3)]">
-                    <div className="w-2.5 h-2.5 rounded-full bg-sky-400" />
-                  </div>
-                  <JobCard
-                    job={job}
-                    isOpen={isOpen(i)}
-                    onToggle={() => toggle(i)}
-                  />
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
+        <AnimatedTimeline isOpen={isOpen} onToggle={toggle} />
       </div>
     </section>
   );
