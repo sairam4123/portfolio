@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sairamthedev.vercel.app"),
+  metadataBase: new URL("https://sairamthe.dev"),
   title: "Sairam Mangeshkar - Portfolio",
   description:
     "Full Stack & Mobile Developer building AI products, mobile apps, and railway simulations. Skilled in  Python, React Native, FastAPI, and PostgreSQL.".slice(
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
         0,
         160,
       ),
-    url: "https://sairamthedev.vercel.app",
+    url: "https://sairamthe.dev",
     siteName: "Sairam Mangeshkar Portfolio",
     images: [
       {
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://sairamthedev.vercel.app",
+    canonical: "https://sairamthe.dev",
   },
 };
 
@@ -96,7 +96,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Sairam Mangeshkar",
-    url: "https://sairamthedev.vercel.app",
+    url: "https://sairamthe.dev",
     email: "mailto:sairam.m.2005.65@gmail.com",
     jobTitle: "Full Stack & Mobile Application Developer",
     knowsAbout: [
@@ -114,6 +114,7 @@ export default function RootLayout({
     sameAs: [
       "https://github.com/sairam4123",
       "https://linkedin.com/in/sairam4123",
+      "https://x.com/sairamthedev",
     ],
   };
 

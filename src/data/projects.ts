@@ -27,7 +27,14 @@ export const projects: Project[] = [
     name: "Podolli AI",
     description:
       "AI-powered podcast generation platform that creates complete podcasts from arbitrary user-provided topics, with recommendation and trending systems.",
-    tech: ["FastAPI", "Python", "React", "TypeScript", "Supabase", "PostgreSQL"],
+    tech: [
+      "FastAPI",
+      "Python",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+    ],
     link: "https://podolli-ai.co.in",
     type: "live",
     Icon: Mic,
