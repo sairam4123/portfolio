@@ -92,7 +92,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
+  const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Sairam Mangeshkar",
@@ -118,6 +118,14 @@ export default function RootLayout({
     ],
   };
 
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "SairamTheDev",
+    alternateName: "Sairam Mangeshkar Portfolio",
+    url: "https://sairamthe.dev",
+  };
+
   return (
     <html
       lang="en"
@@ -127,11 +135,18 @@ export default function RootLayout({
         name="google-site-verification"
         content="p2mObECcwD76yuSTVmUFxTNjas4aarJc-IFxo0L4-r8"
       />
+
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
+            __html: JSON.stringify(personJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd),
           }}
         />
         {children}
