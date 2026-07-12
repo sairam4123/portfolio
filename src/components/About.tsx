@@ -1,16 +1,17 @@
+"use client";
+
 import { GraduationCap, Layers, Train, Code2 } from "lucide-react";
-import {
-  FadeIn,
-  StaggerItem,
-  FloatingParticles,
-} from "@/components/animations";
+import { motion } from "framer-motion";
+import { CountUp, FadeIn, FloatingParticles } from "@/components/animations";
 import { GlowCard } from "@/components/GlowCard";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const stats = [
-  { value: "3+", label: "Years Experience" },
-  { value: "9+", label: "Projects" },
-  { value: "10+", label: "Symposium Wins" },
-  { value: "2", label: "Professional Roles" },
+  { value: 3, suffix: "+", label: "Years Experience" },
+  { value: 9, suffix: "+", label: "Projects" },
+  { value: 10, suffix: "+", label: "Symposium Wins" },
+  { value: 2, suffix: "", label: "Professional Roles" },
 ];
 
 const points = [
@@ -56,34 +57,54 @@ export default function About() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           <div className="grid grid-cols-2 gap-4 h-full">
-            {stats.map(({ value, label }, i) => (
-              <StaggerItem key={label} index={i}>
+            {stats.map(({ value, suffix, label }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 28, scale: 0.94 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease }}
+                whileHover={{ y: -5 }}
+                className="h-full"
+              >
                 <GlowCard glowCircleSize={100}>
                   <div className="flex flex-col items-center justify-center text-center h-full">
                     <span className="text-4xl font-bold text-sky-400 mb-1">
-                      {value}
+                      <CountUp to={value} suffix={suffix} />
                     </span>
                     <span className="text-[#8892b0] text-sm font-medium">
                       {label}
                     </span>
                   </div>
                 </GlowCard>
-              </StaggerItem>
+              </motion.div>
             ))}
           </div>
 
-          <StaggerItem index={4}>
+          <motion.div
+            initial={{ opacity: 0, x: 48 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, delay: 0.15, ease }}
+          >
             <GlowCard className="p-8">
               <ul className="space-y-4 text-[#8892b0] text-base">
                 {points.map(({ icon: Icon, text }, i) => (
-                  <li key={i} className="flex items-start gap-3">
+                  <motion.li
+                    key={i}
+                    className="flex items-start gap-3"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.45, delay: 0.3 + i * 0.1, ease }}
+                  >
                     <Icon size={18} className="text-sky-400 shrink-0 mt-0.5" />
                     <span>{text}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </GlowCard>
-          </StaggerItem>
+          </motion.div>
         </div>
       </div>
     </section>

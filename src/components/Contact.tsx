@@ -46,9 +46,9 @@ export default function Contact() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.15}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            {/* Contact form */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Contact form */}
+          <FadeIn direction="left" delay={0.1}>
             <form
               onSubmit={handleSubmit}
               className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 hover:border-sky-500/20 transition-colors duration-300"
@@ -104,13 +104,15 @@ export default function Contact() {
                 Send Message
               </button>
             </form>
+          </FadeIn>
 
-            {/* Contact info */}
+          {/* Contact info */}
+          <FadeIn direction="right" delay={0.2}>
             <Stagger className="grid grid-cols-2 lg:grid-cols-1 gap-4">
               <StaggerItem index={0}>
                 <a
                   href="mailto:sairam.m.2005.65@gmail.com"
-                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 hover:-translate-y-1 transition-all duration-300 text-center lg:text-left"
                   aria-label="Email"
                 >
                   <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
@@ -133,7 +135,7 @@ export default function Contact() {
               <StaggerItem index={1}>
                 <a
                   href="tel:+917904302458"
-                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 hover:-translate-y-1 transition-all duration-300 text-center lg:text-left"
                   aria-label="Phone"
                 >
                   <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
@@ -156,7 +158,7 @@ export default function Contact() {
                   href="https://github.com/sairam4123"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 hover:-translate-y-1 transition-all duration-300 text-center lg:text-left"
                   aria-label="GitHub"
                 >
                   <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
@@ -181,7 +183,7 @@ export default function Contact() {
                   href="https://linkedin.com/in/sairam4123"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 transition-all duration-300 text-center lg:text-left"
+                  className="group flex flex-col lg:flex-row items-center lg:items-center gap-3 lg:gap-4 p-4 lg:p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/40 hover:bg-sky-600/5 hover:-translate-y-1 transition-all duration-300 text-center lg:text-left"
                   aria-label="LinkedIn"
                 >
                   <div className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20">
@@ -201,8 +203,8 @@ export default function Contact() {
                 </a>
               </StaggerItem>
             </Stagger>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        </div>
       </div>
 
       <div className="mt-20 text-center">

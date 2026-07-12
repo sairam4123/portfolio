@@ -1,67 +1,98 @@
+"use client";
+
 import { Trophy, BookOpen, Award, Gamepad2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import {
-  FadeIn,
-  Stagger,
-  StaggerItem,
-  FloatingParticles,
-} from "@/components/animations";
+import { motion } from "framer-motion";
+import { CountUp, FadeIn, FloatingParticles } from "@/components/animations";
+import { GlowCard } from "@/components/GlowCard";
 
-const hi = (text: string) => (
-  <span className="text-white font-semibold">{text}</span>
-);
+const ease = [0.22, 1, 0.36, 1] as const;
 
-const achievements: {
+const stats: {
   icon: LucideIcon;
   color: string;
   bg: string;
   border: string;
-  content: React.ReactNode;
+  value: number;
+  suffix: string;
+  label: string;
+  detail: string;
 }[] = [
   {
     icon: Trophy,
     color: "text-yellow-400",
     bg: "bg-yellow-500/10",
     border: "border-yellow-500/20",
-    content: (
-      <>
-        Won {hi("10+ prizes")} across {hi("12+ symposiums")}.
-      </>
-    ),
-  },
-  {
-    icon: BookOpen,
-    color: "text-sky-300",
-    bg: "bg-sky-500/10",
-    border: "border-sky-500/20",
-    content: (
-      <>
-        Published a research paper on {hi("TRAX")} in the {hi("IJMRSET")}.
-      </>
-    ),
+    value: 10,
+    suffix: "+",
+    label: "Prizes Won",
+    detail: "Across 12+ technical symposiums",
   },
   {
     icon: Award,
     color: "text-cyan-300",
     bg: "bg-cyan-500/10",
     border: "border-cyan-500/20",
-    content: (
-      <>
-        Received {hi("2× Best Technical Student Award")} at Mookambigai College
-        of Engineering.
-      </>
-    ),
+    value: 2,
+    suffix: "×",
+    label: "Best Technical Student",
+    detail: "Mookambigai College of Engineering",
   },
   {
     icon: Gamepad2,
     color: "text-violet-400",
     bg: "bg-violet-500/10",
     border: "border-violet-500/20",
-    content: (
-      <>Organized {hi("5 GIC Game Jams")} for the Godot India Community.</>
-    ),
+    value: 5,
+    suffix: "",
+    label: "Game Jams Organized",
+    detail: "For the Godot India Community",
+  },
+  {
+    icon: BookOpen,
+    color: "text-sky-300",
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/20",
+    value: 1,
+    suffix: "",
+    label: "Research Paper Published",
+    detail: "TRAX — in the IJMRSET journal",
   },
 ];
+
+function StatTile({ stat, index }: { stat: (typeof stats)[number]; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 36, scale: 0.92 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease }}
+      whileHover={{ y: -6 }}
+      className="h-full"
+    >
+      <GlowCard>
+        <div className="flex items-start justify-between mb-5">
+          <div
+            className={`w-12 h-12 rounded-xl ${stat.bg} border ${stat.border} flex items-center justify-center`}
+          >
+            <stat.icon size={22} className={stat.color} />
+          </div>
+        </div>
+        <p
+          className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent mb-2 leading-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, #f0f9ff 30%, #7dd3fc 80%)",
+          }}
+        >
+          <CountUp to={stat.value} suffix={stat.suffix} />
+        </p>
+        <p className="text-white font-semibold text-sm mb-1">{stat.label}</p>
+        <p className="text-[#8892b0] text-xs leading-relaxed">{stat.detail}</p>
+      </GlowCard>
+    </motion.div>
+  );
+}
 
 export default function Achievements() {
   return (
@@ -77,22 +108,11 @@ export default function Achievements() {
           </div>
         </FadeIn>
 
-        <Stagger className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {achievements.map((a, i) => (
-            <StaggerItem key={i} index={i}>
-              <div className="bg-white/5 h-full backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex gap-5 items-center hover:border-white/20 hover:bg-white/[0.07] transition-all duration-300">
-                <div
-                  className={`shrink-0 w-12 h-12 rounded-xl ${a.bg} border ${a.border} flex items-center justify-center`}
-                >
-                  <a.icon size={22} className={a.color} />
-                </div>
-                <p className="text-[#8892b0] text-sm leading-relaxed">
-                  {a.content}
-                </p>
-              </div>
-            </StaggerItem>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {stats.map((s, i) => (
+            <StatTile key={s.label} stat={s} index={i} />
           ))}
-        </Stagger>
+        </div>
       </div>
     </section>
   );

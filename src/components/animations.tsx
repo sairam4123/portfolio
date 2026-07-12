@@ -1,9 +1,24 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import {
+  motion,
+  animate,
+  useInView,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
+import { useEffect, useRef, type ReactNode } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+// Fades decorative layers out near section edges so they don't hard-clip
+// at section boundaries
+const edgeFadeMask = {
+  maskImage:
+    "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+  WebkitMaskImage:
+    "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+} as const;
 
 interface FadeInProps {
   children: ReactNode;
@@ -58,6 +73,7 @@ export function SectionParticles() {
   return (
     <div
       className="absolute inset-0 overflow-hidden pointer-events-none select-none"
+      style={edgeFadeMask}
       aria-hidden
     >
       <div
@@ -107,6 +123,7 @@ export function FloatingParticles() {
   return (
     <div
       className="absolute inset-0 blur-[6px] overflow-hidden pointer-events-none select-none z-0"
+      style={edgeFadeMask}
       aria-hidden
     >
       {DOTS.map((d, i) => (
@@ -125,6 +142,35 @@ export function FloatingParticles() {
         />
       ))}
     </div>
+  );
+}
+
+// Number counts up from 0 when scrolled into view
+export function CountUp({
+  to,
+  suffix = "",
+  duration = 1.4,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+  const value = useMotionValue(0);
+  const rounded = useTransform(value, (v) => Math.round(v));
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(value, to, { duration, ease });
+    return () => controls.stop();
+  }, [inView, to, value, duration]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      <motion.span>{rounded}</motion.span>
+      {suffix}
+    </span>
   );
 }
 

@@ -18,6 +18,7 @@ export type Project = {
   youtubeId?: string;
   githubLink?: string;
   sih?: string;
+  featured?: boolean;
   Icon: LucideIcon;
 };
 
@@ -37,6 +38,7 @@ export const projects: Project[] = [
     ],
     link: "https://podolli-ai.co.in",
     type: "live",
+    featured: true,
     Icon: Mic,
   },
   {
@@ -55,6 +57,7 @@ export const projects: Project[] = [
     ],
     link: "https://mceapp-v2.vercel.app/",
     type: "live",
+    featured: true,
     Icon: School,
   },
   {
@@ -77,6 +80,7 @@ export const projects: Project[] = [
     type: "youtube",
     youtubeId: "j4dJQz--pl8",
     sih: "SIH25022",
+    featured: true,
     Icon: TrainFront,
   },
   {
